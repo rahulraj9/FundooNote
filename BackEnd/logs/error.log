@@ -1,0 +1,46 @@
+error: {"flag":false,"message":"Registraton Failed !","code":400} {"timestamp":"02-03-2021 19:47:10"}
+error: {"flag":false,"message":"Registraton Failed !","code":400} {"timestamp":"02-03-2021 19:48:40"}
+error: {"flag":false,"message":"Registraton Failed !","code":400} {"timestamp":"02-03-2021 19:52:35"}
+error: {"flag":false,"message":"Registraton Failed !","code":400} {"timestamp":"02-03-2021 19:54:28"}
+error: {"flag":false,"message":"Registraton Failed !","code":400} {"timestamp":"02-03-2021 19:55:57"}
+error: {"flag":false,"message":"Registraton Failed !","code":400} {"timestamp":"02-03-2021 19:58:20"}
+error: {"flag":false,"message":"Registraton Failed !","code":400} {"timestamp":"02-03-2021 19:59:42"}
+error: {"flag":false,"message":"Registraton Failed !","code":400} {"timestamp":"02-03-2021 19:59:53"}
+error: {"flag":false,"message":"Registraton Failed !","code":409} {"timestamp":"02-03-2021 20:01:07"}
+error: {"flag":false,"message":"Registraton Failed !","code":409} {"timestamp":"02-03-2021 20:01:19"}
+error: {"flag":false,"message":"Registraton Failed !","code":400} {"timestamp":"02-03-2021 20:01:28"}
+error: {"flag":false,"message":"Registraton Failed !","code":400} {"timestamp":"02-03-2021 20:01:36"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:19:34"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:20:34"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:20:36"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:24:35"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:27:21"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:30:15"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:37:51"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:38:47"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:38:56"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:42:26"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:42:44"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:42:56"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:43:05"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:45:47"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:47:44"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"02-03-2021 21:50:51"}
+error: {"flag":false,"message":"Email Already Registerd !","code":409} {"timestamp":"03-03-2021 10:42:55"}
+error: {"flag":false,"message":"Email Already Registerd !","code":409} {"timestamp":"03-03-2021 10:43:07"}
+error: {"flag":false,"message":"Registraton Failed !","code":400} {"timestamp":"03-03-2021 10:43:33"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"03-03-2021 11:35:21"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"03-03-2021 11:37:14"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"03-03-2021 11:38:46"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"03-03-2021 11:39:53"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"03-03-2021 11:42:46"}
+error: {"success":false,"message":"something went Wrong"} {"timestamp":"03-03-2021 11:43:25"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"FirstName is Required!","param":"firstName","location":"body"},{"value":"","msg":"FirstName should be only Alphabet!","param":"firstName","location":"body"},{"value":"","msg":"FirstName atleast contains  3 character!","param":"firstName","location":"body"}]} {"timestamp":"03-03-2021 11:45:34"}
+error: {"flag":false,"message":"Email Already Registerd !","code":409} {"timestamp":"03-03-2021 11:48:54"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"FirstName is Required!","param":"firstName","location":"body"},{"value":"","msg":"FirstName should be only Alphabet!","param":"firstName","location":"body"},{"value":"","msg":"FirstName atleast contains  3 character!","param":"firstName","location":"body"}]} {"timestamp":"03-03-2021 11:53:57"}
+error: {"flag":false,"message":"Email Already Registerd !","code":409} {"timestamp":"03-03-2021 17:26:09"}
+error: {"flag":false,"message":"Registraton Failed !","error":{"errors":{"lastName":{"name":"ValidatorError","message":"Path `lastName` is required.","properties":{"message":"Path `lastName` is required.","type":"required","path":"lastName"},"kind":"required","path":"lastName"},"firstName":{"name":"ValidatorError","message":"Path `firstName` is required.","properties":{"message":"Path `firstName` is required.","type":"required","path":"firstName"},"kind":"required","path":"firstName"}},"_message":"User validation failed","name":"ValidationError","message":"User validation failed: lastName: Path `lastName` is required., firstName: Path `firstName` is required."},"code":400} {"timestamp":"03-03-2021 17:27:15"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"03-03-2021 18:17:18"}
+error: {"flag":false,"message":"Email doesnot exits !","code":404} {"timestamp":"03-03-2021 18:17:30"}
+error: {"flag":false,"message":"Email Already Registerd !","code":409} {"timestamp":"03-03-2021 18:18:03"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"FirstName is Required!","param":"firstName","location":"body"},{"value":"","msg":"FirstName should be only Alphabet!","param":"firstName","location":"body"},{"value":"","msg":"FirstName atleast contains  3 character!","param":"firstName","location":"body"}]} {"timestamp":"03-03-2021 18:18:12"}
