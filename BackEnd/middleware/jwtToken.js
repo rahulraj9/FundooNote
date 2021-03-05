@@ -6,7 +6,6 @@ let response={}
 
 
 const tokenGeneration =(payload,next)=>{
-    // try{
         let token=jwt.sign(payload,process.env.TOKEN_SECRET,{expiresIn:'1hr'})
         response.success = true
         response.message ="Token Generated Sucessfully"
@@ -15,8 +14,4 @@ const tokenGeneration =(payload,next)=>{
         return response
 
     }
-    // catch(error){
-    //     next(error)
-    // }
-// }
 module.exports ={tokenGeneration}

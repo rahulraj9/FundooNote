@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
-// const validator = require("validator")
 
+// var nodemailer = require('nodemailer');
+var jwt = require('jsonwebtoken');
 let bcryptpassword = require("../middleware/bcryptpassword")
 let jwtToken = require("../middleware/jwtToken")
 const userSchema = new mongoose.Schema({
@@ -8,7 +9,6 @@ const userSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
-        // description:
 
     },
     lastName: {
@@ -28,6 +28,9 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
 
+    },
+    resetLink: {
+        data: String
     }
 
 })
@@ -67,6 +70,8 @@ class userModel {
 
     }
 
+
+
     userLogin = (req, callback) => {
         users.find({ "email": req.email }, (err, data) => {
             if (err) {
@@ -74,31 +79,54 @@ class userModel {
             } else if (data.length === 0) {
                 callback(data)
             } else {
-                bcryptpassword.comparePassword(req.password,data[0].password).then(async result =>{
-                    if(result){
+                bcryptpassword.comparePassword(req.password, data[0].password).then(async result => {
+                    if (result) {
                         let token = jwtToken.tokenGeneration(this.userDataObject(data[0]));
-                        let userData ={
+                        let userData = {
                             "_id": data[0]._id,
                             "firstName": data[0].firstName,
                             "lastName": data[0].lastName,
                             "email": data[0].email,
-                            "token":token.token                            
+                            "token": token.token
                         }
-                        callback(null,userData)
+                        callback(null, userData)
                     }
-                    else{
-                        callback(null,result)
+                    else {
+                        callback(null, result)
                     }
                 })
             }
 
         })
-
     }
 
+    findOne(mail) {
+        return users.findOne({ email: mail })
+            .then((result) => {
+                return result;
+            })
+            .catch((error) => {
+                return ({ message: "Something Went Wrong Please Check", error: error });
+            })
 
-
-
+    }
 }
 
 module.exports = new userModel()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

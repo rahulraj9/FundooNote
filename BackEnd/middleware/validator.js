@@ -29,5 +29,24 @@ module.exports = {
             .isString()
 
 
+    ],
+    login:[
+        body("email")
+        .trim()
+        .notEmpty().withMessage("Email is Required!")
+        .isEmail().withMessage("Email is Invalid!!!"),
+    body("password")
+        .trim()
+        .notEmpty().withMessage("Password is Required!")
+        .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
+        // .isAlphanumeric().withMessage("Password Should be AlphaNumeric")
+        .isString()
+
+    ],
+    forget:[
+        body("email")
+        .trim()
+        .notEmpty().withMessage("Email is Required!")
+        .isEmail().withMessage("Email is Invalid!!!"),
     ]
 }
