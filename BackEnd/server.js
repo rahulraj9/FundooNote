@@ -1,17 +1,24 @@
 const express = require('express');
 var bodyParser = require('body-parser')
 const app = express();
+const port = 8000;
 const dotenv = require("dotenv");
 // get config vars
 dotenv.config();
-// access config var
-process.env.TOKEN_SECRET;
-const route = require('./routes/authroute')
+
+
+const user = require('./routes/userroute')
+const note = require('./routes/Noteroute')
+
 // parse application/json
 app.use(bodyParser.json())
-app.use(require('body-parser').urlencoded({ extended: true }));
-const port = 8000;
-app.use('/', route)
+
+
+app.use('/user', user)
+app.use('/note', note)
+
+
+
 app.use((error, req, res, next) => {
     let response = {
         success: false,

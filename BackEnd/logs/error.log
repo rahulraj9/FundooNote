@@ -64,3 +64,20 @@ error: {"success":false,"message":"you have filled invalid data","error":[{"valu
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"Email is Required!","param":"email","location":"body"},{"value":"","msg":"Email is Invalid!!!","param":"email","location":"body"}]} {"timestamp":"05-03-2021 15:09:37"}
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"hrlla","msg":"Email is Invalid!!!","param":"email","location":"body"}]} {"timestamp":"05-03-2021 15:09:46"}
 error: {"flag":false,"message":"Email Already Registerd !","code":409} {"timestamp":"06-03-2021 00:26:30"}
+error: {"flag":false,"message":"Email Already Registerd !","code":409} {"timestamp":"06-03-2021 10:53:57"}
+error: {"flag":false,"message":"Email Already Registerd !","code":409} {"timestamp":"06-03-2021 11:28:35"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"06-03-2021 11:49:18"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"Password is Required!","param":"password","location":"body"},{"value":"","msg":"Password atleast contains  6 character!","param":"password","location":"body"}]} {"timestamp":"06-03-2021 11:49:39"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"rahul6538raj","msg":"Email is Invalid!!!","param":"email","location":"body"}]} {"timestamp":"06-03-2021 11:49:54"}
+error: {"flag":false,"message":"Email Already Registerd !","code":409} {"timestamp":"06-03-2021 12:15:11"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"FirstName is Required!","param":"firstName","location":"body"},{"value":"","msg":"FirstName should be only Alphabet!","param":"firstName","location":"body"},{"value":"","msg":"FirstName atleast contains  3 character!","param":"firstName","location":"body"}]} {"timestamp":"06-03-2021 12:16:21"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"aa","msg":"Email is Invalid!!!","param":"email","location":"body"}]} {"timestamp":"06-03-2021 12:16:39"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"hello","msg":"Password atleast contains  6 character!","param":"password","location":"body"}]} {"timestamp":"08-03-2021 14:51:22"}
+error: {"flag":false,"message":"Email Already Registerd !","code":409} {"timestamp":"08-03-2021 14:51:33"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"08-03-2021 15:54:34"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"08-03-2021 17:58:07"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"08-03-2021 17:58:16"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"08-03-2021 17:58:57"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"09-03-2021 22:35:51"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"09-03-2021 22:35:59"}
+error: {"flag":false,"message":"Email doesnot exits !","code":404} {"timestamp":"09-03-2021 22:41:09"}

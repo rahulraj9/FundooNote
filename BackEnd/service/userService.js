@@ -40,6 +40,7 @@ class UserService {
         })
     }
 
+
     forgetPassword(data) {
         let email = data.email
         let tokenData = {
@@ -59,21 +60,19 @@ class UserService {
             })
 
     }
-    resetPassword = function (userDetails, token, callback) {
-        userModel.resetPassword(userDetails, token, function (err, result) {
-            if (err) {
-                callback(err, null);
-            }
-            else if (!result) {
-                callback(null, 'Password reset token is invalid or has expired.');
-            }
-            else if (result) {
-                mailler.mailer(email,token)
-            }
-            else {
-                return ({ message: "Something Went Wrong Please Check", error: error });
-            }
-        })
+    resetPassword(email, password) {
+        let hashPass = bcryptpassword.encrypt(password);
+        return userModel.resetPassword(email, hashPass)
+            .then((result) => {
+                if (result) {
+                    return ({ flag: true, message: "Password has been successfully Changed!!", status: statusCode.OK });
+                } else {
+                    return ({ flag: false, message: "Something Went Wrong Please Do Forget Password Again!!", status: statusCode.BadRequest });
+                }
+            }).catch((err) => {
+                return ({ flag: false, message: "Please Enter Valid Input!!", status: statusCode.NotFound });
+            });
+
     }
 
 

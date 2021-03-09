@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const mailler = require('../middleware/nodemailer')
 // var nodemailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 let bcryptpassword = require("../middleware/bcryptpassword")
@@ -29,9 +29,7 @@ const userSchema = new mongoose.Schema({
         required: true
 
     },
-    resetLink: {
-        data: String
-    }
+
 
 })
 
@@ -48,8 +46,6 @@ class userModel {
         }
 
     }
-
-
     userRegistartion = (req, callback) => {
         users.find({ "email": req.email }, (err, data) => {
             if (err) {
@@ -69,9 +65,6 @@ class userModel {
         })
 
     }
-
-
-
     userLogin = (req, callback) => {
         users.find({ "email": req.email }, (err, data) => {
             if (err) {
@@ -87,7 +80,7 @@ class userModel {
                             "firstName": data[0].firstName,
                             "lastName": data[0].lastName,
                             "email": data[0].email,
-                            "token": token.token
+                            "token": token
                         }
                         callback(null, userData)
                     }
@@ -108,6 +101,17 @@ class userModel {
             .catch((error) => {
                 return ({ message: "Something Went Wrong Please Check", error: error });
             })
+
+    }
+
+
+   resetPassword(email, password) {
+        return users.updateOne({ email: email }, { $set: { password: password } })
+            .then((result) => {
+                return result;
+            }).catch((err) => {
+                return ({ message: "Something Went Wrong Please Check", error: error });
+            });
 
     }
 }
