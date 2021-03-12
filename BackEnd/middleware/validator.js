@@ -48,5 +48,54 @@ module.exports = {
         .trim()
         .notEmpty().withMessage("Email is Required!")
         .isEmail().withMessage("Email is Invalid!!!"),
+    ],
+    resetPassword:[
+        body("password")
+        .trim()
+        .notEmpty().withMessage("Password is Required!")
+        .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
+        // .isAlphanumeric().withMessage("Password Should be AlphaNumeric")
+        .isString()
+    ],
+    addNote: [
+        body('notetitle')
+            .trim()
+            .not()
+            .isEmpty()
+            .withMessage('title required'),
+        body('notedata')
+            .trim()
+            .not()
+            .isEmpty()
+            .withMessage('description required')
+    ],
+    updateNotes: [
+        body('notetitle')
+            .trim()
+            .not()
+            .isEmpty()
+            .withMessage('title should not be empty'),
+        body('notedata')
+            .trim()
+            .not()
+            .isEmpty()
+            .withMessage('Note Data or description should not be empty')
+    ],
+
+    moveToTrash: [
+        body('moveToTrashNote_ID')
+            .trim()
+            .not()
+            .isEmpty()
+            .withMessage('moveToTrashNote_ID should not be empty')
+    ],
+
+    moveToArchive: [
+        body('moveToArchiveNote_ID')
+            .trim()
+            .not()
+            .isEmpty()
+            .withMessage('moveToArchiveNote_ID should not be empty')
     ]
+    
 }

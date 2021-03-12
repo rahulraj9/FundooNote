@@ -4,7 +4,7 @@ let statusCode = require('../middleware/httpStatusCode.json')
 class NoteService {
 
     noteInsert(data, id) {
-         data.userId = id;
+        data.userId = id;
         return noteModel.createNote(data)
             .then((result) => {
                 return ({ success: true, message: "Notes Created Successfully", data: result, status: statusCode.OK });
@@ -14,16 +14,56 @@ class NoteService {
             })
     }
 
-
-    getNoteService() {
-        return noteModel.getNote()
+    updateNote(id, newData) {
+        return noteModel.updateNote(id, newData)
             .then((result) => {
-
-                return ({ message: "Note", data: result });
+                return ({ message: "Notes Update Successfully", data: result, status: statusCode.OK });
             })
             .catch((error) => {
-                return ({ message: " No Notes ", error: error });
+                return ({ message: "Notes is Not found", error: error, status: statusCode.NotFound });
             })
+    }
+
+    deleteNote(id) {
+        return noteModel.deleteNote(id)
+            .then((result) => {
+                return ({ message: "Note Deleted Successfully", data: result, status: statusCode.OK });
+            })
+            .catch((error) => {
+                return ({ message: "Note Record is Not found", error: error, status: statusCode.NotFound });
+            })
+    }
+
+    getUserAllNotes(id) {
+        return noteModel.getUserAllNotes(id)
+            .then((result) => {
+                return ({ message: "User All Notes Successfully", data: result, status: statusCode.OK });
+            })
+            .catch((error) => {
+                return ({ message: "Note Record is Not found", error: error, status: statusCode.NotFound });
+            })
+    }
+
+
+    moveToArchive(obj, callback){
+
+        noteModel.moveToArchive(obj, (err, data)=>{
+            if(err){
+                return callback(err)
+            }else if(data){
+                return callback(null,data)
+            }
+        })
+    }
+
+    moveToTrash = (obj, callback) => {
+        noteModel.moveToTrash(obj, (err, data)=>{
+            if(err){
+               return callback(err);
+            }else if(data){
+                return callback(null,data)
+            }
+        })
     }
 
 }

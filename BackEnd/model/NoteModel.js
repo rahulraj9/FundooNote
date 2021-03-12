@@ -10,12 +10,24 @@ const noteSchema = new Schema({
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User' 
+        ref: 'User'
     },
     color: {
         type: String,
-        default:"white"
-    }
+        default: "#FFFFFF"
+    },
+    isTrash: {
+        type: Boolean,
+        default: false
+    },
+    isArchive: {
+        type: Boolean,
+        default: false
+    },
+    label:[{
+        type:mongoose.Schema.Types.ObjectId, ref:'Label',
+        default:null
+    }]
 
 })
 
@@ -30,19 +42,85 @@ class NoteModel {
             .then((result) => {
                 return result;
             }).catch((error) => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
+                return error;
             });
-    }    
-    getNote() {
-        return userNoteModel.find({})
-            .then((result) => {
+    }
 
+
+
+    updateNote(id, newData) {
+        return userNoteModel.findByIdAndUpdate(id, newData)
+            .then(result => {
                 return result;
             })
-            .catch((error) => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
+            .catch(error => {
+                return error;
             })
     }
+
+    deleteNote(id) {
+        return userNoteModel.findByIdAndRemove(id)
+            .then(result => {
+                return result;
+            })
+            .catch(error => {
+                return error;
+            })
+    }
+
+    getUserAllNotes(id) {
+        return userNoteModel.find({ userId: id }).populate('userId')
+            .then(result => {
+                return result;
+            })
+            .catch(error => {
+                return error;
+            })
+    }
+
+    moveToArchive = (obj, callback) => {
+        userNoteModel.findById(obj.moveToArchiveNote_ID, function (err, data) {
+            if (err) {
+                callback({ 'message': "Note on that ID not found", 'success': false })
+            } else if (data) {
+                if (data.isArchive == true || data.isArchive == false) {
+                    let updatedObj = {
+                        isArchive: !data.isArchive
+                    }
+                    userNoteModel.findByIdAndUpdate(obj.moveToArchiveNote_ID, updatedObj, (err, success) => {
+                        if (err) {
+                            callback({ 'message': "Error failed to move to the Archived", 'success': false })
+                        } else if (success) {
+                            callback({ 'message': "Successfull in moving to the Archived", 'success': true })
+                        }
+                    })
+                }
+            }
+        })
+    }
+
+    moveToTrash = (obj, callback) => {
+        userNoteModel.findById(obj.moveToTrashNote_ID, function (err, data) {
+            if (err) {
+                callback({ 'message': "Note on that ID not found", 'success': false })
+            } else if (data) {
+                if (data.isTrash == true || data.isTrash == false) {
+                    let updatedObj = {
+                        isTrash: !data.isTrash
+                    }
+                    userNoteModel.findByIdAndUpdate(obj.moveToTrashNote_ID, updatedObj, (err, success) => {
+                        if (err) {
+                            callback({ 'message': "Error failed to move to the trash", 'success': false })
+                        } else if (success) {
+                            callback({ 'message': "Successfull in moving to the trash", 'success': true })
+                        }
+                    })
+                }
+
+            }
+        })
+    }
+
 
 }
 

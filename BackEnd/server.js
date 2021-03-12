@@ -9,6 +9,7 @@ dotenv.config();
 
 const user = require('./routes/userroute')
 const note = require('./routes/Noteroute')
+const label = require('./routes/LabelRoute')
 
 // parse application/json
 app.use(bodyParser.json())
@@ -16,6 +17,7 @@ app.use(bodyParser.json())
 
 app.use('/user', user)
 app.use('/note', note)
+app.use('/label',label)
 
 
 
