@@ -8,9 +8,13 @@ router.post('/create',addNote,validation,jwtToken.tokenVerify,noteController.not
 router.get('/get',jwtToken.tokenVerify,noteController.getNote);
 router.put('/update/:id',updateNotes,validation,jwtToken.tokenVerify,noteController.updateNote)
 router.delete('/delete/:id',jwtToken.tokenVerify,noteController.deleteNote)
-
-
 router.put('/moveToArchive',moveToArchive,validation,jwtToken.tokenVerify,noteController.moveToArchive)
 router.put('/moveToTrash',moveToTrash,validation,jwtToken.tokenVerify,noteController.moveToTrash)
+
+/**
+ * LABEL API
+ */
+router.put('/addlabel/:noteId',jwtToken.tokenVerify,noteController.addLabelToNotes)
+router.put('/removelabel/:noteId',jwtToken.tokenVerify,noteController.removelabelfromnote)
 
 module.exports = router

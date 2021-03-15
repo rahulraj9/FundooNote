@@ -119,6 +119,47 @@ class NoteController {
             }
         })
     }
+
+
+    addLabelToNotes(req,res,next){
+        const noteInfoWithLabelId = {
+            noteID: req.params.noteId,
+            labelId: req.body.labelId,
+        };
+        // console.log(noteInfoWithLabelId)
+        noteService.addLabelToNotes(noteInfoWithLabelId, (err, result) => {
+            if (err) {
+                response.success = false;
+                response.message = "Could not create a label on the note";
+                return res.status(statusCode.BadRequest).send(response);
+            } else {
+                response.success = true;
+                response.data = result;
+                response.message = "Label created successfully on the note.";
+                return res.status(statusCode.OK).send(response);
+            }
+        });
+    }
+
+    removelabelfromnote(req, res) {
+            const noteInfoWithLabelId = {
+                noteID: req.params.noteId,
+                labelId: req.body.labelId,
+            };
+            console.log(noteInfoWithLabelId)
+            noteService.removeLabel(noteInfoWithLabelId, (err, result) => {
+                if (err) {
+                    response.success = false;
+                    response.message = "Could not create a label on the note";
+                    return res.status(statusCode.BadRequest).send(response);
+                } else {
+                    response.success = true;
+                    response.data = result;
+                    response.message = "Label created successfully on the note.";
+                    return res.status(statusCode.OK).send(response);
+                }
+            })
+        }
 }
 
 module.exports = new NoteController();

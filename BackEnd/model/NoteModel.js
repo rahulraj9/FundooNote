@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const labelmodel = require("../model/LabelModel")
 const Schema = mongoose.Schema
 const noteSchema = new Schema({
 
@@ -24,10 +25,15 @@ const noteSchema = new Schema({
         type: Boolean,
         default: false
     },
-    labels: {
-        type: Array,
+    // labels: {
+    //     type: Array,
+    //     ref: "labels",
+    // },
+
+    labelId: [{
+        type: mongoose.Schema.Types.ObjectId,
         ref: "labels",
-    },
+    }, ],
 
 })
 
@@ -69,13 +75,14 @@ class NoteModel {
     }
 
     getUserAllNotes(id) {
-        return userNoteModel.find({ userId: id }).populate('userId')
+        return userNoteModel.find({ userId: id}).populate('userId')
             .then(result => {
                 return result;
             })
             .catch(error => {
                 return error;
             })
+          
     }
 
     moveToArchive = (obj, callback) => {
@@ -121,41 +128,33 @@ class NoteModel {
         })
     }
 
-    addLabelToNote = (data, callback) => {
-        userNoteModel.updateOne({ _id: data.noteId },
-            { $push: { labels: data } }, (err, result) => {
-                if (err) {
-                    return callback(err, null);
-                } else {
-                    return callback(null, data);
-                }
-            });
-    };
-    updateLabelToNote = (data, callback) => {
-        userNoteModel.updateOne({ _id: data.noteId, "labels._id": data._id },
-            { $set: { "labels.$.labelName": data.labelName } }, (err, result) => {
-                if (err) {
-                    return callback(err, null);
-                } else {
-                    return callback(null, data);
-                }
-            });
+    addLabelToSingleNote = (noteInfo, callback) => {
+        console.log(noteInfo)
+        userNoteModel.findById(noteInfo.noteID, (error, noteData) => {
+            if (error) callback(error, null);
+            else if (!noteData.labelId.includes(noteInfo.labelId)) {
+                return userNoteModel.findByIdAndUpdate(
+                    noteInfo.noteID, {
+                        $push: {
+                            labelId: noteInfo.labelId,
+                        },
+                    }, { new: true },
+                    callback
+                );
+            }
+            callback(error, null);
+        });
     };
 
-    deleteLabelToNote = (data, callback) => {
-        console.log(data._id);
-        userNoteModel.updateOne({ _id: data._id },
-            { $pop: { label: data } }, (err, result) => {
-                if (err) {
-                    return callback(err, null)
-                }
-                else {
-                    return callback(null, data)
-                }
+    removeLabel = (noteInfo, callback) => {
+        return userNoteModel.findByIdAndUpdate(
+            noteInfo.noteID, {
+                $pull: { labelId: noteInfo.labelId },
+            }, { new: true },
+            callback
+        );
+    };
 
-            })
-
-    }
 }
 
 module.exports = new NoteModel();

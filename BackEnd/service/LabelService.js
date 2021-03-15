@@ -32,50 +32,25 @@ class LabelService {
         });
     };
 
-
-
-
-
-    /**
-     * 
-     * Adding Label On Note
-     * 
-     */
-
-
-    createLabelOnNote = (data, callback) => {
-        Label.create(data, (err, result) => {
-            if (err || result == null) {
-                return callback(err, null);
-            } else {
-                return note.addLabelToNote(result, callback);
-            }
+    updateLabel = (data, callback) => {
+        Label.update(data, (err, result) => {
+          if(err){
+            return callback(err, null);
+          }else {
+            return callback(null,result);
+          }
         });
-    }
+      };
 
-
-    updateLabelOnNote = (data, callback) => {
-        Label.updateLabelName(data, (err, result) => {
-            if (err) {
-                return callback(err, null);
-            } else {
-                note.updateLabelToNote(result, callback);
-            }
+      getAllLabels = (callback) => {
+        Label.read( (err, result) => {
+          if(err){
+            return callback(err, null);
+          }else {
+            return callback(null,result);
+          }
         });
-    }
-
-    deleteLabelOnNote = (data, callback) => {
-        note.deleteLabelToNote(data, (err, result) => {
-            if (err) {
-                return callback(err, null);
-            }
-            else{
-                return callback(null,data)
-            }
-        })
-    }
-
-
+      }
 
 }
 module.exports = new LabelService()

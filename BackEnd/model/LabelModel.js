@@ -25,27 +25,27 @@ class LabelModel {
             userId: data.userId,
             noteId: data.noteId
         });
-        console.log("model" +labelData)
+        console.log("model" + labelData)
         return labelData.save(callback);
     };
- 
 
-    updateLabelName = (data, callback) => {
-        return Label.findByIdAndUpdate(data._id, data, { new: true }, callback);
+    update = (data, callback) => {
+        console.log(data.id)
+        return Label.findByIdAndUpdate(data.id, data.fields, { new: true }, callback);
     };
 
-     
     delete = (data, callback) => {
-        Label.findByIdAndDelete(data.labelId, (err, data) => {
-          if (err || data == null) {
-            return callback(err, null);
-          } else {
-            return callback(null, data);
-          }
+        Label.findByIdAndDelete(data, (err, data) => {
+            if (err || data == null) {
+                return callback(err, null);
+            } else {
+                return callback(null, data);
+            }
         });
+    };
+
+    read = (callback) => {
+        return Label.find(callback);
       };
-   
-
-
 }
 module.exports = new LabelModel();

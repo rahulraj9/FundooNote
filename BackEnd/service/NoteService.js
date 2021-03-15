@@ -45,26 +45,51 @@ class NoteService {
     }
 
 
-    moveToArchive(obj, callback){
+    moveToArchive(obj, callback) {
 
-        noteModel.moveToArchive(obj, (err, data)=>{
-            if(err){
+        noteModel.moveToArchive(obj, (err, data) => {
+            if (err) {
                 return callback(err)
-            }else if(data){
-                return callback(null,data)
+            } else if (data) {
+                return callback(null, data)
             }
         })
     }
 
     moveToTrash = (obj, callback) => {
-        noteModel.moveToTrash(obj, (err, data)=>{
-            if(err){
-               return callback(err);
-            }else if(data){
-                return callback(null,data)
+        noteModel.moveToTrash(obj, (err, data) => {
+            if (err) {
+                return callback(err);
+            } else if (data) {
+                return callback(null, data)
             }
         })
     }
+
+
+
+
+    addLabelToNotes = (noteData, callback) => {
+        noteModel.addLabelToSingleNote(noteData, (err, data) => {
+            if (err) {
+                return callback(err);
+            } else if (data) {
+                return callback(null, data)
+            }
+        });
+    };
+
+
+    removeLabel =  (noteData, callback) => {
+        noteModel.removeLabel(noteData, (err, data) => {
+            if (err) {
+                return callback(err);
+            } else if (data) {
+                return callback(null, data)
+            }
+        });
+    };
+
 
 }
 

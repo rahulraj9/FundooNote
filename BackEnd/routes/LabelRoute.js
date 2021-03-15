@@ -3,14 +3,12 @@ const jwtToken = require('../middleware/jwtToken')
 const LabelController = require('../Controller/LabelController')
 expressValidator = require('express-validator');
 
+
+//creating Label
 route.post('/addlabel',jwtToken.tokenVerify, LabelController.createLabel)
+route.delete('/deletelabel/:id',jwtToken.tokenVerify, LabelController.deleteLabel)
+route.post('/updateLabel/:id',jwtToken.tokenVerify,LabelController.updateLabel)
+route.get('/getuserLabel',LabelController.getUserLabels)
 
-route.post('/addlabelonnote',jwtToken.tokenVerify, LabelController.createLabelOnNote)
-
-route.post('/updatelabelonnote',jwtToken.tokenVerify, LabelController.updateLabelOnNote)
-
-route.delete('/deletelabel',jwtToken.tokenVerify, LabelController.deleteLabel)
-
-route.delete('/deletelabelonNote',jwtToken.tokenVerify, LabelController.deleteLabelOnNote)
 
 module.exports = route
