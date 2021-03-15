@@ -1,22 +1,81 @@
-const labelModel = require('../model/LabelModel')
-const noteModel = require('../model/NoteModel')
-const user = require('../model/usermodel')
+const Label = require('../model/LabelModel')
+const note = require('../model/NoteModel')
 let statusCode = require('../middleware/httpStatusCode.json')
-const { callbackPromise } = require('nodemailer/lib/shared')
+
 
 class LabelService {
 
-    labelInsert(data, id) {
-        data.userId = id;
-       
-        return labelModel.createLabel(data)
-            .then((result) => {
-                return ({ success: true, message: "Label Created Successfully", data: result, status: statusCode.OK });
-            })
-            .catch((error) => {
-                return ({ success: false, message: "Failed to created Label", status: statusCode.BadRequest });
-            })
+
+    /**
+     * 
+     * Creating New Label
+     *  
+     *  
+     */
+    createLabel = (data, callback) => {
+        Label.create(data, (err, result) => {
+            if (err || result == null) {
+                return callback(err, null);
+            } else {
+                return callback(null, result);
+            }
+        });
+    };
+
+    deleteLabel = (data, callback) => {
+        Label.delete(data, (err, result) => {
+            if (err || result == null) {
+                return callback(err, null);
+            } else {
+                return callback(null, result);
+            }
+        });
+    };
+
+
+
+
+
+    /**
+     * 
+     * Adding Label On Note
+     * 
+     */
+
+
+    createLabelOnNote = (data, callback) => {
+        Label.create(data, (err, result) => {
+            if (err || result == null) {
+                return callback(err, null);
+            } else {
+                return note.addLabelToNote(result, callback);
+            }
+        });
     }
+
+
+    updateLabelOnNote = (data, callback) => {
+        Label.updateLabelName(data, (err, result) => {
+            if (err) {
+                return callback(err, null);
+            } else {
+                note.updateLabelToNote(result, callback);
+            }
+        });
+    }
+
+    deleteLabelOnNote = (data, callback) => {
+        note.deleteLabelToNote(data, (err, result) => {
+            if (err) {
+                return callback(err, null);
+            }
+            else{
+                return callback(null,data)
+            }
+        })
+    }
+
+
 
 }
 module.exports = new LabelService()

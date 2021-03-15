@@ -24,10 +24,10 @@ const noteSchema = new Schema({
         type: Boolean,
         default: false
     },
-    label:[{
-        type:mongoose.Schema.Types.ObjectId, ref:'Label',
-        default:null
-    }]
+    labels: {
+        type: Array,
+        ref: "labels",
+    },
 
 })
 
@@ -121,7 +121,41 @@ class NoteModel {
         })
     }
 
+    addLabelToNote = (data, callback) => {
+        userNoteModel.updateOne({ _id: data.noteId },
+            { $push: { labels: data } }, (err, result) => {
+                if (err) {
+                    return callback(err, null);
+                } else {
+                    return callback(null, data);
+                }
+            });
+    };
+    updateLabelToNote = (data, callback) => {
+        userNoteModel.updateOne({ _id: data.noteId, "labels._id": data._id },
+            { $set: { "labels.$.labelName": data.labelName } }, (err, result) => {
+                if (err) {
+                    return callback(err, null);
+                } else {
+                    return callback(null, data);
+                }
+            });
+    };
 
+    deleteLabelToNote = (data, callback) => {
+        console.log(data._id);
+        userNoteModel.updateOne({ _id: data._id },
+            { $pop: { label: data } }, (err, result) => {
+                if (err) {
+                    return callback(err, null)
+                }
+                else {
+                    return callback(null, data)
+                }
+
+            })
+
+    }
 }
 
 module.exports = new NoteModel();
