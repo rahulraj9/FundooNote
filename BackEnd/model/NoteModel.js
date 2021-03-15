@@ -132,7 +132,7 @@ class NoteModel {
         console.log(noteInfo)
         userNoteModel.findById(noteInfo.noteID, (error, noteData) => {
             if (error) callback(error, null);
-            else if (!noteData.labelId.includes(noteInfo.labelId)) {
+            else  {
                 return userNoteModel.findByIdAndUpdate(
                     noteInfo.noteID, {
                         $push: {

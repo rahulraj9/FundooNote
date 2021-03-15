@@ -91,3 +91,4 @@ error: {"success":false,"message":"you have filled invalid data","error":[{"valu
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"title should not be empty","param":"notetitle","location":"body"}]} {"timestamp":"11-03-2021 23:37:11"}
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"title required","param":"notetitle","location":"body"}]} {"timestamp":"14-03-2021 03:48:31"}
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"title required","param":"notetitle","location":"body"}]} {"timestamp":"14-03-2021 03:48:47"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"15-03-2021 23:04:38"}
