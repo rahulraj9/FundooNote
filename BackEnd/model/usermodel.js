@@ -29,6 +29,10 @@ const userSchema = new mongoose.Schema({
         required: true
 
     },
+    isActivated: {
+		type: Boolean,
+		default: false
+	}
 
 
 })
@@ -114,6 +118,9 @@ class userModel {
             });
 
     }
+
+
+    
 }
 
 module.exports = new userModel()

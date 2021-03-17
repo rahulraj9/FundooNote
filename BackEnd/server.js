@@ -6,6 +6,8 @@ const dotenv = require("dotenv");
 // get config vars
 dotenv.config();
 
+const swaggerUi = require('swagger-ui-express'),
+swaggerDocument = require('./swagger.json')
 
 const user = require('./routes/userroute')
 const note = require('./routes/Noteroute')
@@ -20,6 +22,7 @@ app.use('/note', note)
 app.use('/label',label)
 
 
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use((error, req, res, next) => {
     let response = {
@@ -29,6 +32,8 @@ app.use((error, req, res, next) => {
     }
     res.status(500).send(response);
 })
+
+
 app.listen(port, () => {
     console.log(`Server started at port: ${port}`);
     require('./dbconfig/dbConnection')

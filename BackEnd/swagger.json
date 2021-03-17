@@ -1,0 +1,214 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Fundoo Note",
+        "description": "Google Keep Clone",
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        }
+    },
+    "host": "localhost:8000",
+    "basePath": "/user",
+    "tags": [
+        {
+            "name": "Users",
+            "description": "User Form for FUNDOO NOTE"
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "securityDefinitions": {
+        "user_api_key": {
+        "type": "apiKey",
+        "name": "x-access-token",
+        "in": "header",
+        "description": "authorised token "
+        }
+        },    
+    "paths": {
+        "/registration": {
+            "post": {
+                "summary": "Register a new user",
+                "tags": [
+                    "Users Registration"
+                ],
+                "description": "Create a new user in system",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Register a new user",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Registration Success",
+                        "schema": {
+                            "$ref": "#/definitions/User"
+                        }
+                    },
+                    "500": {
+                        "description": "User Registration failed!!"
+                    }
+                }
+            }
+        },
+        "/login": {
+            "post": {
+                "summary": "Login user",
+                "tags": [
+                    "Users Login"
+                ],
+                "description": "Login user in Fundoo Note",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "Login user",
+                        "schema": {
+                            "$ref": "#/definitions/Login"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Login Success",
+                        "schema": {
+                            "$ref": "#/definitions/Login"
+                        }
+                    },
+                    "500": {
+                        "description": "User login failed!!"
+                    }
+                }
+            }
+        },
+        "/forgetpassword": {
+            "post": {
+                "summary": "Forgetpassword",
+                "tags": [
+                    "Users forgetpassword"
+                ],
+                "description": "Getting Link for forgetpassword",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "forgetpassword",
+                        "schema": {
+                            "$ref": "#/definitions/forgetpassword"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ResetLink Send sucessfully",
+                        "schema": {
+                            "$ref": "#/definitions/forgetpassword"
+                        }
+                    },
+                    "500": {
+                        "description": "some Error occure!!"
+                    }
+                }
+            }
+        },
+        "/resetPassword/:token": {
+            "post": {
+                "summary": "ResetPassword",
+                "tags": [
+                    "Users ResetPassword"
+                ],
+                "description": "ResetPassword",
+                "parameters": [
+                    {
+                        "name": "user",
+                        "in": "body",
+                        "description": "forgetpassword",
+                        "schema": {
+                            "$ref": "#/definitions/ResetPassword"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ResetLink Send sucessfully",
+                        "schema": {
+                            "$ref": "#/definitions/forgetpassword"
+                        }
+                    },
+                    "500": {
+                        "description": "some Error occure!!"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "User": {
+            "properties": {
+                "firstName": {
+                    "type": "string"
+                },
+                "lastName": {
+                    "type": "string"
+                },
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "Login": {
+            "properties": {
+                "email": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "forgetpassword": {
+            "properties": {
+                "email": {
+                    "type": "string"
+                }
+            }
+        },
+        "ResetPassword":{
+            "properties":{
+                "password":{
+                    "type":"string"
+                }
+            }
+        }
+    }
+}

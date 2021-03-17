@@ -89,6 +89,27 @@ class NoteService {
             }
         });
     };
+   
+
+
+    createCollaborator = (collaboratorData, callBack) => {
+		noteModel.createCollaborator(collaboratorData, (error, data) => {
+			if (error)
+				return callBack(error, null);
+			return callBack(null, data);
+		});
+	}
+
+ 
+    removeCollaborator =  (collaboratorData, callback) => {
+        noteModel.removeCollaborator(collaboratorData, (err, data) => {
+            if (err) {
+                return callback(err);
+            } else if (data) {
+                return callback(null, data)
+            }
+        });
+    };
 
 
 }

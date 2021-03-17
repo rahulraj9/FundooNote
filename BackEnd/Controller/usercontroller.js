@@ -88,5 +88,6 @@ class userController {
             next(error)
         }
     }
+
 }
 module.exports = new userController();

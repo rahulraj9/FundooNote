@@ -160,6 +160,55 @@ class NoteController {
                 }
             })
         }
+
+
+        createCollaborator = (req, res,next) => {
+            try {
+                const collaboratorData = {
+                    noteId: req.body.noteId,
+                    userId: req.body.userId,
+                    noteCreatorId: req.decoded._id
+                };
+    
+                noteService.createCollaborator(collaboratorData, (error, data) => {
+                    if (error) {
+                        response.success = false;
+                        response.message = "Could not find id";
+                        return res.status(statusCode.BadRequest).send(response);
+                    }
+                    else{
+                        response.success = true;
+                        response.data = data;
+                        response.message = "id found And collaborator Added";
+                        return res.status(statusCode.OK).send(response);
+                    }
+                });
+            }
+            catch (error) {
+                next(error);
+            }
+        }
+
+        removeCollaborator(req, res) {
+            const collaboratorData = {
+                noteId: req.body.noteId,
+                userId: req.body.userId,
+                noteCreatorId: req.decoded._id
+            };
+            console.log(collaboratorData)
+            noteService.removeCollaborator(collaboratorData, (err, result) => {
+                if (err) {
+                    response.success = false;
+                    response.message = "Some error occured";
+                    return res.status(statusCode.BadRequest).send(response);
+                } else {
+                    response.success = true;
+                    response.data = result;
+                    response.message = "collaborator Remove";
+                    return res.status(statusCode.OK).send(response);
+                }
+            })
+        }
 }
 
 module.exports = new NoteController();

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose')
 const labelmodel = require("../model/LabelModel")
+const usermodel = require("../model/usermodel")
+const async = require('async-waterfall')
 const Schema = mongoose.Schema
 const noteSchema = new Schema({
 
@@ -25,16 +27,15 @@ const noteSchema = new Schema({
         type: Boolean,
         default: false
     },
-    // labels: {
-    //     type: Array,
-    //     ref: "labels",
-    // },
-
     labelId: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "labels",
-    }, ],
+        ref: "label",
+    },],
 
+    collaborator: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    }],
 })
 
 const userNoteModel = mongoose.model('Note', noteSchema)
@@ -75,17 +76,18 @@ class NoteModel {
     }
 
     getUserAllNotes(id) {
-        return userNoteModel.find({ userId: id}).populate('userId')
+        return userNoteModel.find({ userId: id }).populate('userId')
             .then(result => {
                 return result;
             })
             .catch(error => {
                 return error;
             })
-          
+
     }
 
     moveToArchive = (obj, callback) => {
+
         userNoteModel.findById(obj.moveToArchiveNote_ID, function (err, data) {
             if (err) {
                 callback({ 'message': "Note on that ID not found", 'success': false })
@@ -132,13 +134,13 @@ class NoteModel {
         console.log(noteInfo)
         userNoteModel.findById(noteInfo.noteID, (error, noteData) => {
             if (error) callback(error, null);
-            else  {
+            else {
                 return userNoteModel.findByIdAndUpdate(
                     noteInfo.noteID, {
-                        $push: {
-                            labelId: noteInfo.labelId,
-                        },
-                    }, { new: true },
+                    $push: {
+                        labelId: noteInfo.labelId,
+                    },
+                }, { new: true },
                     callback
                 );
             }
@@ -149,13 +151,62 @@ class NoteModel {
     removeLabel = (noteInfo, callback) => {
         return userNoteModel.findByIdAndUpdate(
             noteInfo.noteID, {
-                $pull: { labelId: noteInfo.labelId },
-            }, { new: true },
+            $pull: { labelId: noteInfo.labelId },
+        }, { new: true },
             callback
         );
     };
 
+    createCollaborator = (collaboratorData, callBack) => {
+        let id = collaboratorData.userId;
+        console.log("inside model" + id)
+        return userNoteModel.find({ collaborator: id }, (error, data) => {
+            if (error) {
+                callBack(error, null)
+            }
+            else {
+                console.log("user Found with user id" + id)
+                userNoteModel.findById(collaboratorData.noteId, (error, data) => {
+                    if (error) {
+                        callBack(error, null)
+                    }
+                    else {
+                        console.log("noteid found with NoteId" + collaboratorData.noteId)
+                        userNoteModel.findByIdAndUpdate(collaboratorData.noteId,
+                            { $push: { collaborator: id } }, { new: true }, (error, data) => {
+                                if (error) {
+                                    callBack(error, null)
+                                }
+                                else {
+                                    console.log("collaborator Added")
+                                    callBack(null, data)
+                                }
+                            })
+                    }
+                })
+            }
+        })
+    }
+
+    removeCollaborator = (collaboratorData, callback) => {
+        let id = collaboratorData.userId;
+        console.log(id)
+        return userNoteModel.findByIdAndUpdate(
+            collaboratorData.noteId, {
+            $pull: { collaborator: id },
+        }, { new: true },(error,data)=>{
+            if(error){
+                callback(error)
+            }
+            else{
+                callback(null,data)
+            }
+        }
+        )
+    };
+
+
+
 }
 
 module.exports = new NoteModel();
-

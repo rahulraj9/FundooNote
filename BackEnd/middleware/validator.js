@@ -96,6 +96,13 @@ module.exports = {
             .not()
             .isEmpty()
             .withMessage('moveToArchiveNote_ID should not be empty')
+    ],
+
+    label:[
+        body('labelId')
+        .trim()
+        .notEmpty().withMessage("labelId is Required!")
     ]
+
     
 }

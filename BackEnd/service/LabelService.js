@@ -51,6 +51,6 @@ class LabelService {
           }
         });
       }
-
+  
 }
 module.exports = new LabelService()
