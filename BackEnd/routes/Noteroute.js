@@ -8,8 +8,8 @@ router.post('/create', addNote, validation, jwtToken.tokenVerify, noteController
 router.get('/get', jwtToken.tokenVerify, noteController.getNote);
 router.put('/update/:id', updateNotes, validation, jwtToken.tokenVerify, noteController.updateNote)
 router.delete('/delete/:id', jwtToken.tokenVerify, noteController.deleteNote)
-router.put('/moveToArchive', moveToArchive, validation, jwtToken.tokenVerify, noteController.moveToArchive)
-router.put('/moveToTrash', moveToTrash, validation, jwtToken.tokenVerify, noteController.moveToTrash)
+router.put('/moveToArchive/:id', jwtToken.tokenVerify, noteController.archiveNote)
+router.put('/moveToTrash/:id', jwtToken.tokenVerify, noteController.trashNote)
 
 /**
  * LABEL API

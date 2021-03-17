@@ -98,3 +98,6 @@ error: {"success":false,"message":"you have filled invalid data","error":[{"valu
 error: {"flag":false,"message":"Email Already Registerd !","code":409} {"timestamp":"16-03-2021 23:05:08"}
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"labelId is Required!","param":"labelId","location":"body"}]} {"timestamp":"16-03-2021 23:46:43"}
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"labelId is Required!","param":"labelId","location":"body"}]} {"timestamp":"16-03-2021 23:48:00"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"17-03-2021 11:07:49"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"Password is Required!","param":"password","location":"body"},{"value":"","msg":"Password atleast contains  6 character!","param":"password","location":"body"}]} {"timestamp":"17-03-2021 11:08:21"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"moveToArchiveNote_ID should not be empty","param":"moveToArchiveNote_ID","location":"body"}]} {"timestamp":"17-03-2021 13:10:11"}

@@ -35,7 +35,8 @@ class NoteService {
     }
 
     getUserAllNotes(id) {
-        return noteModel.getUserAllNotes(id)
+        let userId = {userId: id}
+        return noteModel.getUserAllNotes(userId)
             .then((result) => {
                 return ({ message: "User All Notes Successfully", data: result, status: statusCode.OK });
             })
@@ -45,27 +46,45 @@ class NoteService {
     }
 
 
-    moveToArchive(obj, callback) {
+    archiveNote(id) {
+        return noteModel.findOne(id)
+            .then((data) => {
+                let flag = { isArchive: false }
+                if (data.isArchive == false) {
+                    flag.isArchive = true;
+                }
+                return noteModel.updateNote(id, flag)
+                    .then((result) => {
+                        return ({ message: "Notes Archived Successfully", data: result, status: statusCode.OK });
+                    })
+                    .catch((error) => {
+                        return ({ message: "Notes is Not found", error: error, status: statusCode.NotFound });
+                    })
+            })
+            .catch((error) => {
+                return ({ message: "Notes is Not found", error: error, status: statusCode.NotFound });
+            })
 
-        noteModel.moveToArchive(obj, (err, data) => {
-            if (err) {
-                return callback(err)
-            } else if (data) {
-                return callback(null, data)
-            }
-        })
     }
-
-    moveToTrash = (obj, callback) => {
-        noteModel.moveToTrash(obj, (err, data) => {
-            if (err) {
-                return callback(err);
-            } else if (data) {
-                return callback(null, data)
-            }
-        })
+    trashNote(id) {
+        return noteModel.findOne(id)
+            .then((data) => {
+                let flag = { isTrash: false }
+                if (data.isTrash == false) {
+                    flag.isTrash = true;
+                }
+                return noteModel.updateNote(id, flag)
+                    .then((result) => {
+                        return ({ message: "Notes Trash Successfully", data: result, status: statusCode.OK });
+                    })
+                    .catch((error) => {
+                        return ({ message: "Notes is Not found", error: error, status: statusCode.NotFound });
+                    })
+            })
+            .catch((error) => {
+                return ({ message: "Notes is Not found", error: error, status: statusCode.NotFound });
+            })
     }
-
 
 
 

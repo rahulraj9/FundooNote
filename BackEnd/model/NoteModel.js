@@ -76,7 +76,7 @@ class NoteModel {
     }
 
     getUserAllNotes(id) {
-        return userNoteModel.find({ userId: id }).populate('userId')
+        return userNoteModel.find(id).populate('userId').populate('labelId')
             .then(result => {
                 return result;
             })
@@ -86,49 +86,18 @@ class NoteModel {
 
     }
 
-    moveToArchive = (obj, callback) => {
-
-        userNoteModel.findById(obj.moveToArchiveNote_ID, function (err, data) {
-            if (err) {
-                callback({ 'message': "Note on that ID not found", 'success': false })
-            } else if (data) {
-                if (data.isArchive == true || data.isArchive == false) {
-                    let updatedObj = {
-                        isArchive: !data.isArchive
-                    }
-                    userNoteModel.findByIdAndUpdate(obj.moveToArchiveNote_ID, updatedObj, (err, success) => {
-                        if (err) {
-                            callback({ 'message': "Error failed to move to the Archived", 'success': false })
-                        } else if (success) {
-                            callback({ 'message': "Successfull in moving to the Archived", 'success': true })
-                        }
-                    })
-                }
-            }
-        })
+    findOne(id) {
+        return userNoteModel.findOne({ _id: id })
+            .then((result) => {
+                console.log(result);
+                return result;
+            })
+            .catch((error) => {
+                console.log(error);
+                return ({ message: "Something Went Wrong Please Check", error: error });
+            })
     }
 
-    moveToTrash = (obj, callback) => {
-        userNoteModel.findById(obj.moveToTrashNote_ID, function (err, data) {
-            if (err) {
-                callback({ 'message': "Note on that ID not found", 'success': false })
-            } else if (data) {
-                if (data.isTrash == true || data.isTrash == false) {
-                    let updatedObj = {
-                        isTrash: !data.isTrash
-                    }
-                    userNoteModel.findByIdAndUpdate(obj.moveToTrashNote_ID, updatedObj, (err, success) => {
-                        if (err) {
-                            callback({ 'message': "Error failed to move to the trash", 'success': false })
-                        } else if (success) {
-                            callback({ 'message': "Successfull in moving to the trash", 'success': true })
-                        }
-                    })
-                }
-
-            }
-        })
-    }
 
     addLabelToSingleNote = (noteInfo, callback) => {
         console.log(noteInfo)

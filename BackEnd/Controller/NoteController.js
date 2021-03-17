@@ -1,5 +1,6 @@
 const noteService = require('../service/NoteService')
 let statusCode = require('../middleware/httpStatusCode.json')
+const redisCache = require('../middleware/redisCache')
 let response = {}
 class NoteController {
 
@@ -33,7 +34,6 @@ class NoteController {
             noteService.updateNote(id, newData)
                 .then((result) => {
                     response.flag = true;
-                    // response.data = result.data;
                     response.message = result.message;
                     res.status(result.status).send(response);
                 }).catch((err) => {
@@ -70,6 +70,7 @@ class NoteController {
             let id = req.decoded._id;
             noteService.getUserAllNotes(id)
                 .then((result) => {
+                    redisCache.loadCache(id,result.data)
                     response.data = result.data;
                     response.flag = true;
                     response.message = result.message;
@@ -84,49 +85,55 @@ class NoteController {
         }
     }
 
-    moveToArchive(req, res) {
-        let obj = {
-            moveToArchiveNote_ID: req.body.moveToArchiveNote_ID
+    archiveNote(req, res) {
+        try {
+            let userid = req.decoded.id;
+            let id = req.params.id;
+            noteService.archiveNote(id)
+                .then((result) => {
+                    redisCache.deleteCache(userid)
+                    response.flag = true;
+                    response.data = result.data;
+                    response.message = result.message;
+                    res.status(result.status).send(response);
+                }).catch((err) => {
+                    response.success = false;
+                    response.data = err.message;
+                    res.status(err.status).send(response);
+                });
+
+        } catch (error) {
+            console.error("Record is Not found Please Enter Correct One");
         }
-        console.log(obj);
-        noteService.moveToArchive(obj, (data, err) => {
-            if (data) {
-                response.success = data.success;
-                response.message = data.message;
-                return res.status(statusCode.OK).send(response);
-            } else if (err) {
-
-                response.success = err.success;
-                response.message = err.message;
-                return res.status(statusCode.BadRequest).send(response);
-            }
-        })
     }
+    trashNote(req, res){
+        try {
+            let userid = req.decoded.id;
+            let id = req.params.id;
+            noteService.trashNote(id)
+                .then((result) => {
+                    redisCache.deleteCache(userid)
+                    response.flag = true;
+                    response.data = result.data;
+                    response.message = result.message;
+                    res.status(result.status).send(response);
+                }).catch((err) => {
+                    response.success = false;
+                    response.data = err.message;
+                    res.status(err.status).send(response);
+                });
 
-    moveToTrash(req, res, next) {
-        let obj = {
-            moveToTrashNote_ID: req.body.moveToTrashNote_ID
+        } catch (error) {
+            console.error("Record is Not found Please Enter Correct One");
         }
-        noteService.moveToTrash(obj, (err, data) => {
-            if (data) {
-                response.success = data.success;
-                response.message = data.message;
-                return res.status(statusCode.OK).send(response);
-            } else if (err) {
-                response.success = err.success;
-                response.message = err.message;
-                return res.status(statusCode.BadRequest).send(response);
-            }
-        })
     }
-
 
     addLabelToNotes(req,res,next){
         const noteInfoWithLabelId = {
             noteID: req.params.noteId,
             labelId: req.body.labelId,
         };
-        // console.log(noteInfoWithLabelId)
+      
         noteService.addLabelToNotes(noteInfoWithLabelId, (err, result) => {
             if (err) {
                 response.success = false;
