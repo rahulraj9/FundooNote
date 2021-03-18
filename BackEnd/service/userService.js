@@ -4,7 +4,7 @@ const mailler = require('../middleware/nodemailer')
 let statusCode = require("../middleware/httpStatusCode.json")
 let { OK, Conflict, NotFound, BadRequest, unauthorized } = require("../middleware/httpStatusCode.json")
 const bcryptpassword = require("../middleware/bcryptpassword")
-// const redis = require('../middleware/redisCache')
+
 
 class UserService {
     userRegistrationService = (req, callback) => {

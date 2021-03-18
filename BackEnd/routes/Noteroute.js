@@ -3,9 +3,10 @@ const { addNote, deleteNote, updateNotes, moveToArchive, moveToTrash,label } = r
 const { validation } = require('../middleware/validate')
 const noteController = require('../Controller/NoteController')
 const jwtToken = require("../middleware/jwtToken")
+const redisCache = require('../middleware/redisCache')
 
 router.post('/note', addNote, validation, jwtToken.tokenVerify, noteController.noteCreate);
-router.get('/note', jwtToken.tokenVerify, noteController.getNote);
+router.get('/note', jwtToken.tokenVerify,redisCache.checkCache, noteController.getNote);
 router.put('/note/:id', jwtToken.tokenVerify, noteController.updateNote)
 router.delete('/note/:id', jwtToken.tokenVerify, noteController.deleteNote)
 
@@ -25,6 +26,7 @@ router.put('/removelabel/:noteId',label,validation, jwtToken.tokenVerify, noteCo
  * Collaborator
  */
 
+router.get('/note/search',jwtToken.tokenVerify,noteController.search)
 router.put('/createCollaborator', jwtToken.tokenVerify, noteController.createCollaborator)
 router.put('/removeCollaborator', jwtToken.tokenVerify, noteController.removeCollaborator)
 

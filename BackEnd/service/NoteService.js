@@ -1,4 +1,5 @@
 const noteModel = require('../model/NoteModel')
+const user = require('../model/usermodel')
 let statusCode = require('../middleware/httpStatusCode.json')
 
 class NoteService {
@@ -113,6 +114,18 @@ class NoteService {
     };
    
 
+    search(searchKey) {
+        return user.search(searchKey)
+            .then((result) => {
+                if (result.length == 0) {
+                    return ({ message: "Search Matching Data Not Found!", error: err, status: statusCode.OK });
+                } else {
+                    return ({ message: "Successfully Search Matching Data For Collabrator", data: result, status: statusCode.OK });
+                }
+            }).catch((err) => {
+                return ({ message: "Search Matching Data Not Found!", error: err, status: statusCode.NotFound });
+            });
+    }
 
     createCollaborator = (collaboratorData, callBack) => {
 		noteModel.createCollaborator(collaboratorData, (error, data) => {

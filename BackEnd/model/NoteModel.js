@@ -128,26 +128,22 @@ class NoteModel {
 
     createCollaborator = (collaboratorData, callBack) => {
         let id = collaboratorData.userId;
-        console.log("inside model" + id)
         return userNoteModel.find({ collaborator: id }, (error, data) => {
             if (error) {
                 callBack(error, null)
             }
             else {
-                console.log("user Found with user id" + id)
                 userNoteModel.findById(collaboratorData.noteId, (error, data) => {
                     if (error) {
                         callBack(error, null)
                     }
                     else {
-                        console.log("noteid found with NoteId" + collaboratorData.noteId)
                         userNoteModel.findByIdAndUpdate(collaboratorData.noteId,
                             { $push: { collaborator: id } }, { new: true }, (error, data) => {
                                 if (error) {
                                     callBack(error, null)
                                 }
                                 else {
-                                    console.log("collaborator Added")
                                     callBack(null, data)
                                 }
                             })

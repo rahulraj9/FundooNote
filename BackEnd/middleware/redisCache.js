@@ -4,8 +4,8 @@ const redis_client = redis.createClient(REDIS_PORT)
 
 class RedisCache {
     checkCache = (req, res, next) => {
-        console.log(`notes ${req.decoded.id}`)
-        redis_client.get(`notes ${req.decoded.id}`, (err, data) => {
+        console.log(`notes ${req.decoded._id}`)
+        redis_client.get(`notes ${req.decoded._id}`, (err, data) => {
             if (err) {
                 console.log(err);
                 res.status(400).send(err);

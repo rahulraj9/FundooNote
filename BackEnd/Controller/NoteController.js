@@ -173,6 +173,21 @@ class NoteController {
             })
         }
 
+        search(req, res) {
+            let searchKey = req.body.searchKey;
+            console.log(searchKey)
+            noteService.search(searchKey)
+                .then((result) => {
+                    response.data = result.data;
+                    response.flag = true;
+                    response.message = result.message;
+                    res.status(result.status).send(response);
+                }).catch((err) => {
+                    response.flag = false;
+                    response.data = err.message;
+                    res.status(err.status).send(response);
+                });
+        }
 
         createCollaborator = (req, res,next) => {
             try {

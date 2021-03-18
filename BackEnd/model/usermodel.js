@@ -120,6 +120,21 @@ class userModel {
 
     }
 
+    search(searchKey) {
+        return users.find({
+            $or: [
+                { "email": { $regex: searchKey } },
+                { "firstName": { $regex: searchKey } },
+                { "lastName": { $regex: searchKey } }
+            ]
+        })
+            .then((result) => {
+                return result;
+            })
+            .catch((error) => {
+                return error;
+            })
+    }
 
     
 }
