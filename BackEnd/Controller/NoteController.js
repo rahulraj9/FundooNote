@@ -10,6 +10,7 @@ class NoteController {
             let id = req.decoded._id;
             noteService.noteInsert(req.body, id)
                 .then((result) => {
+                    redisCache.loadCache(id,result.data)
                     response.data = result.data;
                     response.flag = true;
                     response.message = result.message;
@@ -17,7 +18,7 @@ class NoteController {
                 }).catch((err) => {
                     response.flag = false;
                     response.data = err.message;
-                    res.status(result.status).send(response);
+                    res.status(err.status).send(response);
                 });
         } catch (error) {
             console.log(error);
@@ -33,6 +34,8 @@ class NoteController {
             console.log("update id and data", id, newData);
             noteService.updateNote(id, newData)
                 .then((result) => {
+                    redisCache.deleteCache(id,result.newdata)
+                    response.data = newData
                     response.flag = true;
                     response.message = result.message;
                     res.status(result.status).send(response);
@@ -50,8 +53,10 @@ class NoteController {
     deleteNote(req, res, next) {
         try {
             let id = req.params.id;
+            console.log(id)
             noteService.deleteNote(id)
                 .then((result) => {
+                    redisCache.deleteCache(id)
                     response.flag = true;
                     response.data = result.data;
                     response.message = result.message;
@@ -65,7 +70,7 @@ class NoteController {
             next(error)
         }
     }
-    getNote(req, res) {
+    getNote(req, res,next) {
         try {
             let id = req.decoded._id;
             noteService.getUserAllNotes(id)
@@ -78,14 +83,14 @@ class NoteController {
                 }).catch((err) => {
                     response.flag = false;
                     response.data = err.message;
-                    res.status(result.status).send(response);
+                    res.status(err.status).send(response);
                 });
         } catch (error) {
-            console.error("Employee Record is Not found Please Enter Correct One");
+            next(error);
         }
     }
 
-    archiveNote(req, res) {
+    archiveNote(req, res,next) {
         try {
             let userid = req.decoded.id;
             let id = req.params.id;
@@ -103,10 +108,10 @@ class NoteController {
                 });
 
         } catch (error) {
-            console.error("Record is Not found Please Enter Correct One");
+            next(error)
         }
     }
-    trashNote(req, res){
+    trashNote(req, res,next){
         try {
             let userid = req.decoded.id;
             let id = req.params.id;
@@ -124,7 +129,7 @@ class NoteController {
                 });
 
         } catch (error) {
-            console.error("Record is Not found Please Enter Correct One");
+            next(error)
         }
     }
 

@@ -8,7 +8,7 @@ class RedisCache {
         redis_client.get(`notes ${req.decoded.id}`, (err, data) => {
             if (err) {
                 console.log(err);
-                res.status(500).send(err);
+                res.status(400).send(err);
             }
             if (data != null) {
                 console.log("data from redis" + data)
@@ -22,6 +22,7 @@ class RedisCache {
 
     //load data into cache memory
     loadCache = (userId, data) => {
+        console.log("cache loaded")
         redis_client.set(`notes ${userId}`, JSON.stringify(data));
     }
 
@@ -30,7 +31,7 @@ class RedisCache {
             from: "cache memory",
         }), (err, data) => {
             if (err) {
-                console.log("eroor");
+                console.log("error");
             } else {
                 console.log("deleted", data);
             }

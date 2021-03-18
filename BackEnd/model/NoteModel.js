@@ -76,7 +76,7 @@ class NoteModel {
     }
 
     getUserAllNotes(id) {
-        return userNoteModel.find(id).populate('userId').populate('labelId')
+        return userNoteModel.find(id).populate('userId')    //.populate('labelId')
             .then(result => {
                 return result;
             })

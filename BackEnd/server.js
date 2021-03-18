@@ -18,7 +18,7 @@ app.use(bodyParser.json())
 
 
 app.use('/user', user)
-app.use('/note', note)
+app.use('/', note)
 app.use('/label',label)
 
 

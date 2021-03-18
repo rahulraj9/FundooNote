@@ -10,13 +10,9 @@
         }
     },
     "host": "localhost:8000",
-    "basePath": "/user",
-    "tags": [
-        {
-            "name": "Users",
-            "description": "User Form for FUNDOO NOTE"
-        }
-    ],
+    "basePath": "/",
+   
+    
     "schemes": [
         "http",
         "https"
@@ -28,19 +24,24 @@
         "application/json"
     ],
     "securityDefinitions": {
-        "user_api_key": {
-        "type": "apiKey",
-        "name": "x-access-token",
-        "in": "header",
-        "description": "authorised token "
+        "token": {
+            "type": "apiKey",
+            "name": "token",
+            "in": "header",
+            "description": "authorised token "
         }
-        },    
+    },
+    "security": [
+        {
+            "token": []
+        }
+    ],
     "paths": {
-        "/registration": {
+        "/user/registration": {
             "post": {
                 "summary": "Register a new user",
                 "tags": [
-                    "Users Registration"
+                    "Users"
                 ],
                 "description": "Create a new user in system",
                 "parameters": [
@@ -69,11 +70,11 @@
                 }
             }
         },
-        "/login": {
+        "/user/login": {
             "post": {
                 "summary": "Login user",
                 "tags": [
-                    "Users Login"
+                    "Users"
                 ],
                 "description": "Login user in Fundoo Note",
                 "parameters": [
@@ -102,11 +103,11 @@
                 }
             }
         },
-        "/forgetpassword": {
+        "/user/forgetpassword": {
             "post": {
                 "summary": "Forgetpassword",
                 "tags": [
-                    "Users forgetpassword"
+                    "Users"
                 ],
                 "description": "Getting Link for forgetpassword",
                 "parameters": [
@@ -135,11 +136,11 @@
                 }
             }
         },
-        "/resetPassword/:token": {
+        "/user/resetPassword/:token": {
             "post": {
                 "summary": "ResetPassword",
                 "tags": [
-                    "Users ResetPassword"
+                    "Users"
                 ],
                 "description": "ResetPassword",
                 "parameters": [
@@ -167,9 +168,193 @@
                     }
                 }
             }
+        },
+        "/note": {
+            "post": {
+                "summary": "create new Notes",
+                "tags": [
+                    "Notes"
+                ],
+                "description": "Create a new note in system",
+                "parameters": [
+                    {
+                        "name": "Note",
+                        "in": "body",
+                        "description": "Register a new user",
+                        "schema": {
+                            "$ref": "#/definitions/createNote"
+                        }
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note added sucessfully",
+                        "schema": {
+                            "$ref": "#/definitions/createNote"
+                        }
+                    },
+                    "500": {
+                        "description": "error occured!!"
+                    }
+                }
+            },
+            "get": {
+                "summary": "Getting All Notes of User",
+                "tags": [
+                    "Notes"
+                ],
+                "description": "Get Notes",
+                "parameters": [
+                    {
+                        "name": "Note",
+                        "description": "Creating Note"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Getting All Note sucessfully"
+                    },
+                    "500": {
+                        "description": "some Error occure!!"
+                    }
+                }
+            }
+        },
+        "/note/{id}": {
+            "delete": {
+                "summary": "Delete Notes",
+                "tags": [
+                    "Notes"
+                    
+                ],
+                "description": "Note deleted from the system",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required":"true",
+                        "description": "Note id(which is supposed to be deleted) "
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note added sucessfully"
+                    },
+                    "500": {
+                        "description": "error occured!!"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Modify Notes",
+                "tags": [
+                    "Notes"
+                ],
+                "description": "Modify Note from the system",
+                "parameters": [
+                    {
+
+                        "name": "details",
+                        "in": "body",
+                        "required":"true",
+                        "description": "Data which you want to Modify ",
+                        "schema": {
+                            "$ref": "#/definitions/createNote"
+                        }
+                    },
+                    {
+                        "name":"id",
+                        "in":"path",
+                        "required":"true",
+                        "description": "Note id(which is supposed to be modified) "
+
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note added sucessfully",
+                        "schema": {
+                            "$ref": "#/definitions/createNote"
+                        }
+                    },
+                    "500": {
+                        "description": "error occured!!"
+                    }
+                }
+            }
+            
+        },
+        "/moveToArchive/{id}":{
+            "put": {
+                "summary": "Move Note to Archive",
+                "tags": [
+                    "Notes"
+                ],
+                "description": "Notes to Be ISArchived or !ISArchived",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required":"true",
+                        "description": "Note id(which is supposed to be Archive) "
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note sucessfully Archived"
+                    },
+                    "500": {
+                        "description": "error occured!!"
+                    }
+                }
+            }
+
+        },
+        "/moveToTrash/{id}":{
+            "put": {
+                "summary": "Move Note to Trash",
+                "tags": [
+                    "Notes"
+                ],
+                "description": "Notes to Be TRASH or !TRASH",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required":"true",
+                        "description": "Note id(which is supposed to be Trash) "
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Note sucessfully Trash"
+                    },
+                    "500": {
+                        "description": "error occured!!"
+                    }
+                }
+            }
+
         }
     },
-
     "definitions": {
         "User": {
             "properties": {
@@ -204,10 +389,20 @@
                 }
             }
         },
-        "ResetPassword":{
-            "properties":{
-                "password":{
-                    "type":"string"
+        "ResetPassword": {
+            "properties": {
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "createNote": {
+            "properties": {
+                "notetitle": {
+                    "type": "string"
+                },
+                "notedata": {
+                    "type": "string"
                 }
             }
         }

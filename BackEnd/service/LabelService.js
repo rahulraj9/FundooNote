@@ -5,13 +5,6 @@ let statusCode = require('../middleware/httpStatusCode.json')
 
 class LabelService {
 
-
-    /**
-     * 
-     * Creating New Label
-     *  
-     *  
-     */
     createLabel = (data, callback) => {
         Label.create(data, (err, result) => {
             if (err || result == null) {

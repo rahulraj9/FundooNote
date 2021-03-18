@@ -27,6 +27,9 @@ class NoteService {
     deleteNote(id) {
         return noteModel.deleteNote(id)
             .then((result) => {
+                if(result.length == 0){
+                    return ({ message: "No NOte", data: result, status: statusCode.BadRequest });
+                }
                 return ({ message: "Note Deleted Successfully", data: result, status: statusCode.OK });
             })
             .catch((error) => {

@@ -4,10 +4,12 @@ const { validation } = require('../middleware/validate')
 const noteController = require('../Controller/NoteController')
 const jwtToken = require("../middleware/jwtToken")
 
-router.post('/create', addNote, validation, jwtToken.tokenVerify, noteController.noteCreate);
-router.get('/get', jwtToken.tokenVerify, noteController.getNote);
-router.put('/update/:id', updateNotes, validation, jwtToken.tokenVerify, noteController.updateNote)
-router.delete('/delete/:id', jwtToken.tokenVerify, noteController.deleteNote)
+router.post('/note', addNote, validation, jwtToken.tokenVerify, noteController.noteCreate);
+router.get('/note', jwtToken.tokenVerify, noteController.getNote);
+router.put('/note/:id', jwtToken.tokenVerify, noteController.updateNote)
+router.delete('/note/:id', jwtToken.tokenVerify, noteController.deleteNote)
+
+
 router.put('/moveToArchive/:id', jwtToken.tokenVerify, noteController.archiveNote)
 router.put('/moveToTrash/:id', jwtToken.tokenVerify, noteController.trashNote)
 
