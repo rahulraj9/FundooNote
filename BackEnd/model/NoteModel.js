@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const labelmodel = require("../model/LabelModel")
 const usermodel = require("../model/usermodel")
-const async = require('async-waterfall')
+const redisCache = require('../middleware/redisCache')
 const Schema = mongoose.Schema
 const noteSchema = new Schema({
 
@@ -104,14 +104,16 @@ class NoteModel {
         userNoteModel.findById(noteInfo.noteID, (error, noteData) => {
             if (error) callback(error, null);
             else {
+
                 return userNoteModel.findByIdAndUpdate(
                     noteInfo.noteID, {
                     $push: {
                         labelId: noteInfo.labelId,
                     },
                 }, { new: true },
-                    callback
+                       callback
                 );
+                
             }
             callback(error, null);
         });

@@ -34,7 +34,7 @@ class NoteController {
             console.log("update id and data", id, newData);
             noteService.updateNote(id, newData)
                 .then((result) => {
-                    redisCache.deleteCache(id,result.newdata)
+                    redisCache.loadCache(id,result.newdata)
                     response.data = newData
                     response.flag = true;
                     response.message = result.message;
@@ -138,7 +138,7 @@ class NoteController {
             noteID: req.params.noteId,
             labelId: req.body.labelId,
         };
-      
+        
         noteService.addLabelToNotes(noteInfoWithLabelId, (err, result) => {
             if (err) {
                 response.success = false;

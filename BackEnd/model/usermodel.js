@@ -67,7 +67,6 @@ class userModel {
             }
 
         })
-
     }
     userLogin = (req, callback) => {
         users.find({ "email": req.email }, (err, data) => {
@@ -135,25 +134,6 @@ class userModel {
                 return error;
             })
     }
-
-    
 }
 
 module.exports = new userModel()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

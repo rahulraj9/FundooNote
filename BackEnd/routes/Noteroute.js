@@ -27,6 +27,7 @@ router.put('/removelabel/:noteId',label,validation, jwtToken.tokenVerify, noteCo
  */
 
 router.get('/note/search',jwtToken.tokenVerify,noteController.search)
+
 router.put('/createCollaborator', jwtToken.tokenVerify, noteController.createCollaborator)
 router.put('/removeCollaborator', jwtToken.tokenVerify, noteController.removeCollaborator)
 

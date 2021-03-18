@@ -3,7 +3,7 @@ var bodyParser = require('body-parser')
 const app = express();
 const port = 8000;
 const dotenv = require("dotenv");
-// get config vars
+
 dotenv.config();
 
 const swaggerUi = require('swagger-ui-express'),
@@ -19,7 +19,7 @@ app.use(bodyParser.json())
 
 app.use('/user', user)
 app.use('/', note)
-app.use('/label',label)
+app.use('/',label)
 
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

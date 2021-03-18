@@ -33,7 +33,7 @@ class RedisCache {
             if (err) {
                 console.log("error");
             } else {
-                console.log("deleted", data);
+                console.log("deleted data from cache");
             }
         })
     }

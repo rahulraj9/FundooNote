@@ -5,10 +5,10 @@ expressValidator = require('express-validator');
 
 
 //creating Label
-route.post('/addlabel',jwtToken.tokenVerify, LabelController.createLabel)
-route.delete('/deletelabel/:id',jwtToken.tokenVerify, LabelController.deleteLabel)
-route.post('/updateLabel/:id',jwtToken.tokenVerify,LabelController.updateLabel)
-route.get('/getuserLabel',LabelController.getUserLabels)
+route.post('/label',jwtToken.tokenVerify, LabelController.createLabel)
+route.delete('/label/:id',jwtToken.tokenVerify, LabelController.deleteLabel)
+route.put('/label/:id',jwtToken.tokenVerify,LabelController.updateLabel)
+route.get('/label',LabelController.getUserLabels)
 
 
 module.exports = route
