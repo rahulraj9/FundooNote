@@ -38,3 +38,5 @@ app.listen(port, () => {
     console.log(`Server started at port: ${port}`);
     require('./dbconfig/dbConnection')
 })
+
+module.exports = app //exports the server for testing purposes.

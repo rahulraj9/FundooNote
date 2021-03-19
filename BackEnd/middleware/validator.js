@@ -25,6 +25,7 @@ module.exports = {
             .trim()
             .notEmpty().withMessage("Password is Required!")
             .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
+            .isLength({ max: 11 }).withMessage("Password atleast contains  6 character!")
             // .isAlphanumeric().withMessage("Password Should be AlphaNumeric")
             .isString()
 

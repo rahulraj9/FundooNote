@@ -1,0 +1,53 @@
+{
+    "user": {
+        "registerUserProperData": {
+            "firstName": "aaa",
+            "lastName": "bbbb",
+            "email": "aaabbb@gmail.com",
+            "password": "helllonndsd"
+        },
+        "registerUserEmptyData": {
+            "firstName": "",
+            "lastName": "",
+            "email": "",
+            "password": ""
+        },
+        "registrationNameLength": {
+            "firstName": "am",
+            "lastName": "khan",
+            "email": "amirkhan@gmail.com",
+            "password": "12"
+        },
+        "registrationNumberData": {
+            "firstName": "232",
+            "lastName": "",
+            "email": "",
+            "password": ""
+        },
+        "registrationInvalidEmail": {
+            "firstName": "rahul",
+            "lastName": "gandhi",
+            "email": "chotabhim",
+            "password": "iamstrong"
+        },
+        "registrationPasswordLength": {
+            "firstName": "amir",
+            "lastName": "khan",
+            "email": "amirkhan@gmail.com",
+            "password": "12"
+        },
+        "registrationMaxPassword": {
+            "firstName": "jay",
+            "lastName": "patanahi",
+            "email": "jaypagal@gmail.com",
+            "password": "12asdfghjkllkjhgfasdfghjklasdfghjkasxdcfvghjk"
+        },
+        "registrationDuplicateEmail": {
+            "firstName": "billy",
+            "lastName": "mrsgates",
+            "email": "jokingboyrahul@gmail.com",
+            "password": "billy1234"
+        }
+
+    }
+}
