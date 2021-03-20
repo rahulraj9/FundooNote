@@ -29,7 +29,7 @@ class NoteService {
     deleteNote(id) {
         return noteModel.deleteNote(id)
             .then((result) => {
-                if(result.length == 0){
+                if (result.length == 0) {
                     return ({ message: "No NOte", data: result, status: statusCode.BadRequest });
                 }
                 return ({ message: "Note Deleted Successfully", data: result, status: statusCode.OK });
@@ -40,7 +40,7 @@ class NoteService {
     }
 
     getUserAllNotes(id) {
-        let userId = {userId: id}
+        let userId = { userId: id }
         return noteModel.getUserAllNotes(userId)
             .then((result) => {
                 return ({ message: "User All Notes Successfully", data: result, status: statusCode.OK });
@@ -98,14 +98,14 @@ class NoteService {
             if (err) {
                 return callback(err);
             } else if (data) {
-                redisCache.loadCache(data.noteId,data)
+                redisCache.loadCache(data.noteId, data)
                 return callback(null, data)
             }
         });
     };
 
 
-    removeLabel =  (noteData, callback) => {
+    removeLabel = (noteData, callback) => {
         noteModel.removeLabel(noteData, (err, data) => {
             if (err) {
                 return callback(err);
@@ -114,7 +114,7 @@ class NoteService {
             }
         });
     };
-   
+
 
     search(searchKey) {
         return user.search(searchKey)
@@ -130,15 +130,15 @@ class NoteService {
     }
 
     createCollaborator = (collaboratorData, callBack) => {
-		noteModel.createCollaborator(collaboratorData, (error, data) => {
-			if (error)
-				return callBack(error, null);
-			return callBack(null, data);
-		});
-	}
+        noteModel.createCollaborator(collaboratorData, (error, data) => {
+            if (error)
+                return callBack(error, null);
+            return callBack(null, data);
+        });
+    }
 
- 
-    removeCollaborator =  (collaboratorData, callback) => {
+
+    removeCollaborator = (collaboratorData, callback) => {
         noteModel.removeCollaborator(collaboratorData, (err, data) => {
             if (err) {
                 return callback(err);

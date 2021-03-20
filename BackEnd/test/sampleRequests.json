@@ -47,7 +47,62 @@
             "lastName": "mrsgates",
             "email": "jokingboyrahul@gmail.com",
             "password": "billy1234"
+        },
+
+
+       
+
+
+        "loginUserEmptyData": {
+           "email":"",
+           "password":""
+        },
+        "loginInvalidEmail": {
+            "email": "iaminvalid",
+            "password": "runnnn"
+        },
+        "loginMinLength": {
+            "email": "jokingboyrahul@gmail.com",
+            "password": "ru"
+        },
+        "loginMaxLength": {
+            "email": "jokingboyrahul@gmail.com",
+            "password": "1234567878900asasddsffggfhgjhgdfgfgfgfdgdgfd"
+        },
+        "loginEmailAbsent": {
+            "email": "iamnotpresent@gmail.com",
+            "password": "youcannotfindme"
+        },
+        "loginIncorrectCredentials": {
+            "email": "jokingboyrahul@gmail.com",
+            "password": "vaish1234"
+        },
+        "loginCorrectCredentials": {
+            "email": "jokingboyrahul@gmail.com",
+            "password": "helloMini"
+        },
+
+
+
+        "forgetEmptyEmail": {
+            "email": ""
+        },
+        "forgetInvalidEmail": {
+            "email": "iamsososoinvalid"
+        },
+        "forgetValidAbsent": {
+            "email": "abcsimple@gmail.com"
+        },
+        "forgetAllValid": {
+            "email": "rahul6538raj@gmail.com"
+        },
+        "resetEmpty": {
+            "password": ""
         }
 
+
+
+
     }
+    
 }

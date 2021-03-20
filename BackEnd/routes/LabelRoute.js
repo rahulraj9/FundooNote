@@ -1,4 +1,5 @@
 const route = require("express").Router();
+
 const jwtToken = require('../middleware/jwtToken')
 const LabelController = require('../Controller/LabelController')
 expressValidator = require('express-validator');
@@ -8,7 +9,7 @@ expressValidator = require('express-validator');
 route.post('/label',jwtToken.tokenVerify, LabelController.createLabel)
 route.delete('/label/:id',jwtToken.tokenVerify, LabelController.deleteLabel)
 route.put('/label/:id',jwtToken.tokenVerify,LabelController.updateLabel)
-route.get('/label',LabelController.getUserLabels)
+route.get('/label',jwtToken.tokenVerify,LabelController.getUserLabels)
 
 
 module.exports = route

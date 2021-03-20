@@ -111,9 +111,9 @@ class NoteModel {
                         labelId: noteInfo.labelId,
                     },
                 }, { new: true },
-                       callback
+                    callback
                 );
-                
+
             }
             callback(error, null);
         });
@@ -161,12 +161,12 @@ class NoteModel {
         return userNoteModel.findByIdAndUpdate(
             collaboratorData.noteId, {
             $pull: { collaborator: id },
-        }, { new: true },(error,data)=>{
-            if(error){
+        }, { new: true }, (error, data) => {
+            if (error) {
                 callback(error)
             }
-            else{
-                callback(null,data)
+            else {
+                callback(null, data)
             }
         }
         )

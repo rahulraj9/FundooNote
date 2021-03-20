@@ -17,7 +17,7 @@ class RedisCache {
         });
     };
 
-    //load data into cache memory
+
     loadCache = (userId, data) => {
         redis_client.set(`notes ${userId}`, JSON.stringify(data));
     }

@@ -30,9 +30,9 @@ const userSchema = new mongoose.Schema({
 
     },
     isActivated: {
-		type: Boolean,
-		default: false
-	}
+        type: Boolean,
+        default: false
+    }
 
 
 })
@@ -71,7 +71,7 @@ class userModel {
     userLogin = (req, callback) => {
         users.find({ "email": req.email }, (err, data) => {
             if (err) {
-               
+
                 callback(err)
             } else if (data.length === 0) {
                 callback(data)
@@ -109,7 +109,7 @@ class userModel {
     }
 
 
-   resetPassword(email, password) {
+    resetPassword(email, password) {
         return users.updateOne({ email: email }, { $set: { password: password } })
             .then((result) => {
                 return result;

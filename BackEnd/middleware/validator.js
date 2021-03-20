@@ -25,38 +25,40 @@ module.exports = {
             .trim()
             .notEmpty().withMessage("Password is Required!")
             .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
-            .isLength({ max: 11 }).withMessage("Password atleast contains  6 character!")
+            .isLength({ max: 11 }).withMessage("Password Max contains  11 character!")
             // .isAlphanumeric().withMessage("Password Should be AlphaNumeric")
             .isString()
 
 
     ],
-    login:[
+    login: [
         body("email")
-        .trim()
-        .notEmpty().withMessage("Email is Required!")
-        .isEmail().withMessage("Email is Invalid!!!"),
-    body("password")
-        .trim()
-        .notEmpty().withMessage("Password is Required!")
-        .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
-        // .isAlphanumeric().withMessage("Password Should be AlphaNumeric")
-        .isString()
+            .trim()
+            .notEmpty().withMessage("Email is Required!")
+            .isEmail().withMessage("Email is Invalid!!!"),
+        body("password")
+            .trim()
+            .notEmpty().withMessage("Password is Required!")
+            .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
+            // .isAlphanumeric().withMessage("Password Should be AlphaNumeric")
+            .isString()
+            .isLength({ max: 11 }).withMessage("Password Max contains  11 character!")
+
 
     ],
-    forget:[
+    forget: [
         body("email")
-        .trim()
-        .notEmpty().withMessage("Email is Required!")
-        .isEmail().withMessage("Email is Invalid!!!"),
+            .trim()
+            .notEmpty().withMessage("Email is Required!")
+            .isEmail().withMessage("Email is Invalid!!!"),
     ],
-    resetPassword:[
+    resetPassword: [
         body("password")
-        .trim()
-        .notEmpty().withMessage("Password is Required!")
-        .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
-        // .isAlphanumeric().withMessage("Password Should be AlphaNumeric")
-        .isString()
+            .trim()
+            .notEmpty().withMessage("Password is Required!")
+            .isLength({ min: 6 }).withMessage("Password atleast contains  6 character!")
+            // .isAlphanumeric().withMessage("Password Should be AlphaNumeric")
+            .isString()
     ],
     addNote: [
         body('notetitle')
@@ -99,11 +101,11 @@ module.exports = {
             .withMessage('moveToArchiveNote_ID should not be empty')
     ],
 
-    label:[
+    label: [
         body('labelId')
-        .trim()
-        .notEmpty().withMessage("labelId is Required!")
+            .trim()
+            .notEmpty().withMessage("labelId is Required!")
     ]
 
-    
+
 }

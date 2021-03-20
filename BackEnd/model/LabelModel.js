@@ -23,7 +23,6 @@ class LabelModel {
         const labelData = new Label({
             labelName: data.labelName,
             userId: data.userId,
-            noteId: data.noteId
         });
         console.log("model" + labelData)
         return labelData.save(callback);
@@ -46,6 +45,6 @@ class LabelModel {
 
     read = (callback) => {
         return Label.find(callback);
-      };
+    };
 }
 module.exports = new LabelModel();

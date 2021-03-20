@@ -1,9 +1,9 @@
 const express = require('express');
-var bodyParser = require('body-parser')
 const app = express();
 const port = 8000;
-const dotenv = require("dotenv");
+var bodyParser = require('body-parser')
 
+const dotenv = require("dotenv");
 dotenv.config();
 
 const swaggerUi = require('swagger-ui-express'),
