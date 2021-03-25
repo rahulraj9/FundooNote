@@ -10,7 +10,9 @@
 @media only screen and (max-width: 600px) {
     .App {
         display: flex;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
+        position: fixed;
+        margin-right: 26px;
     }
 }
