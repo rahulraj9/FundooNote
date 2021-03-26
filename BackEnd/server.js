@@ -6,8 +6,11 @@ var bodyParser = require('body-parser')
 const dotenv = require("dotenv");
 dotenv.config();
 
+
+var cors = require('cors')
+
 const swaggerUi = require('swagger-ui-express'),
-swaggerDocument = require('./swagger.json')
+    swaggerDocument = require('./swagger.json')
 
 const user = require('./routes/userroute')
 const note = require('./routes/Noteroute')
@@ -15,11 +18,12 @@ const label = require('./routes/LabelRoute')
 
 // parse application/json
 app.use(bodyParser.json())
+app.use(cors())
 
 
 app.use('/user', user)
 app.use('/', note)
-app.use('/',label)
+app.use('/', label)
 
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));

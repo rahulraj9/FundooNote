@@ -5,6 +5,8 @@ import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
 
+import services from '../../Services/userServices'
+ const service = new services()
 
 class Signup extends React.Component {
     constructor(props) {
@@ -77,7 +79,7 @@ class Signup extends React.Component {
             )
         ) {
             this.setState({ firstNameFlag: true })
-            this.setState({ firstNameErrorMsg: "Enter proper name" })
+            this.setState({ firstNameErrorMsg: "Enter valid name" })
             isError = true
         }
         if (this.state.firstName.length === 0) {
@@ -99,15 +101,15 @@ class Signup extends React.Component {
          *  @description : Validation for Email
          */
 
-        if (!/[a-zA-Z0-9._]+[@]{1}[a-zA-Z120-9]*[.]{1}[a-zA-Z]*$/.test(this.state.email)){
+        if (!/[a-zA-Z0-9._]+[@]{1}[a-zA-Z120-9]*[.]{1}[a-zA-Z]*$/.test(this.state.email)) {
             this.setState({ emailFlag: true })
-            this.setState({ emailErrorMsg: "Enter proper email id" })
+            this.setState({ emailErrorMsg: "Enter valid email id" })
             isError = true
         }
 
         if (this.state.email.length === 0) {
             this.setState({ emailFlag: true })
-            this.setState({ emailErrorMsg: "Enter email" })
+            this.setState({ emailErrorMsg: "Choose a Fundoo Mail" })
             isError = true
         }
 
@@ -121,14 +123,11 @@ class Signup extends React.Component {
             isError = true
         }
 
-
-        // if (this.state.confirmPassword.length === 0) {
-        //     this.setState({ confirmPasswordFlag: true })
-        //     this.setState({ confirmPasswordErrorMsg: "Confirm your password" })
-        //     isError = true
-        // }
-
-
+        if (this.state.password.length > 11) {
+            this.setState({ passwordFlag: true })
+            this.setState({ passwordErrorMsg: "password is too long" })
+            isError = true
+        }
 
         if (this.state.password !== this.state.confirmPassword) {
             this.setState({ confirmPasswordFlag: true })
@@ -136,21 +135,27 @@ class Signup extends React.Component {
             isError = true
 
         }
-
         return isError
-
-
-
     }
-
-
 
 
     onSubmit = (e) => {
         const err = this.validate();
         if (!err) {
-
             console.log("calling api");
+            let registrationData = {
+                firstName: this.state.firstName,
+                lastName: this.state.lastName,
+                email: this.state.email,
+                password: this.state.password,
+            };
+            console.log(registrationData)
+
+            service.Registration(registrationData).then((registrationData) => {
+               console.log("Reg succesfully");
+            }).catch((error) => {
+                console.log("Registration Failed" + error);
+            })
         }
         else {
             console.log("reg failed")
@@ -174,7 +179,7 @@ class Signup extends React.Component {
                                 <font color="#e53935">o</font>
                             </b>
                         </span>
-                        <div className="registrationContainerHeaderText">Create your Fundoo Account </div>
+                        <div className="registrationContainerHeaderText">Create your Fundoo Account</div>
                         <div className="formContainer">
                             <form className="form">
 
@@ -251,6 +256,7 @@ class Signup extends React.Component {
                                     </div>
                                 </div>
 
+
                                 <span className="checkBoxInputs">
                                     <Checkbox
                                         color="primary"
@@ -259,7 +265,6 @@ class Signup extends React.Component {
                                     />
                                     Show Password
                                 </span>
-
 
                                 <div className="footerButtons">
                                     <div className="signInLink">
@@ -278,8 +283,6 @@ class Signup extends React.Component {
                                         </Button>
                                     </div>
                                 </div>
-
-
                             </form>
                             <div className="regImg">
                                 <img src="https://ssl.gstatic.com/accounts/signup/glif/account.svg" alt="google imge" />

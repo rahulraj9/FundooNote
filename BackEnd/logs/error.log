@@ -459,3 +459,6 @@ error: {"flag":false,"message":"password not matched !","code":401} {"timestamp"
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"Email is Required!","param":"email","location":"body"},{"value":"","msg":"Email is Invalid!!!","param":"email","location":"body"}]} {"timestamp":"20-03-2021 20:43:01"}
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"iamsososoinvalid","msg":"Email is Invalid!!!","param":"email","location":"body"}]} {"timestamp":"20-03-2021 20:43:01"}
 error: {"success":false,"message":"you have filled invalid data","error":[{"value":"iamsososoinvalid","msg":"Email is Invalid!!!","param":"email","location":"body"}]} {"timestamp":"20-03-2021 20:43:01"}
+error: {"flag":false,"message":"Email doesnot exits !","code":404} {"timestamp":"26-03-2021 15:36:33"}
+error: {"flag":false,"message":"Email doesnot exits !","code":404} {"timestamp":"26-03-2021 15:37:08"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"26-03-2021 15:41:24"}
