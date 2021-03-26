@@ -1,5 +1,5 @@
 import React from 'react';
-import './Signup.css'
+import './SignIn.css'
 
 import TextField from '@material-ui/core/TextField';
 import Checkbox from '@material-ui/core/Checkbox'
@@ -130,9 +130,9 @@ class Signup extends React.Component {
          * @description : Validation for password
          */
 
-        if (this.state.password.length === 0) {
+        if (this.state.password.length <6 ) {
             this.setState({ passwordFlag: true })
-            this.setState({ passwordErrorMsg: "Enter a password" })
+            this.setState({ passwordErrorMsg: "Password is too Short" })
             isError = true
         }
 
@@ -156,28 +156,28 @@ class Signup extends React.Component {
         const err = this.validate();
         if (!err) {
             console.log("calling api");
-            let registrationData = {
+            let loginData = {
                 firstName: this.state.firstName,
                 lastName: this.state.lastName,
                 email: this.state.email,
                 password: this.state.password,
             };
-            console.log(registrationData)
+            console.log(loginData)
 
-            service.Registration(registrationData).then((registrationData) => {
+            service.login(loginData).then((loginData) => {
                 console.log("Reg succesfully");
-                this.setState({ snackType: "success", snackMessage: "Registration successful", open: true, setOpen: true })
-               
+                this.setState({ snackType: "success", snackMessage: "login successful", open: true, setOpen: true })
+
 
             }).catch((error) => {
-                console.log("Registration Failed" + error);
-                this.setState({ snackType: "error", snackMessage: "Registration Failed", open: true, setOpen: true })
+                console.log("login Failed" + error);
+                this.setState({ snackType: "error", snackMessage: "login Failed", open: true, setOpen: true })
             })
         }
         else {
             console.log("reg failed")
 
-            this.setState({ snackType: "error", snackMessage: "Registration Failed", open: true, setOpen: true })
+            this.setState({ snackType: "error", snackMessage: "login Failed", open: true, setOpen: true })
         }
     }
 
@@ -185,10 +185,10 @@ class Signup extends React.Component {
     render() {
 
         return (
-            <div className="registrationContainer">
-                <div className="registrationContainerBox">
-                    <div className="registrationContainerHeader">
-                        <span className="registrationInlineTitle">
+            <div className="loginContainer">
+                <div className="loginContainerBox">
+                    <div className="loginContainerHeader">
+                        <span className="loginInlineTitle">
                             <b>
                                 <font color="#1976d2">F</font>
                                 <font color="#e53935">u</font>
@@ -198,36 +198,10 @@ class Signup extends React.Component {
                                 <font color="#e53935">o</font>
                             </b>
                         </span>
-                        <div className="registrationContainerHeaderText">Create your Fundoo Account</div>
+                        <div className="loginContainerHeaderText">Sign In</div>
+                        <div className="loginContainerHeaderText1">Use your Fundoo Account</div>
                         <div className="formContainer">
                             <form className="form">
-
-                                <div className="formInput">
-                                    <div className="formInputField">
-                                        <TextField
-                                            name="firstName"
-                                            onChange={(e) => this.change(e)}
-                                            value={this.state.firstName}
-                                            error={this.state.firstNameFlag}
-                                            helperText={this.state.firstNameErrorMsg}
-                                            label="First Name"
-                                            size="small"
-                                            variant="outlined"
-                                            fullWidth />
-                                    </div>
-                                    <div className="formInputField">
-                                        <TextField
-                                            name="lastName"
-                                            onChange={(e) => this.change(e)}
-                                            value={this.state.lasttName}
-                                            error={this.state.lastNameFlag}
-                                            helperText={this.state.lastNameErrorMsg}
-                                            label="Last Name"
-                                            size="small"
-                                            variant="outlined"
-                                            fullWidth />
-                                    </div>
-                                </div>
 
                                 <div className="formInput">
                                     <div className="formInputField">
@@ -260,19 +234,6 @@ class Signup extends React.Component {
                                             type={this.state.showPassword ? "text" : "password"}
                                             fullWidth />
                                     </div>
-                                    <div className="formInputField">
-                                        <TextField
-                                            name="confirmPassword"
-                                            value={this.state.confirmPassword}
-                                            helperText={this.state.confirmPasswordErrorMsg}
-                                            error={this.state.confirmPasswordFlag}
-                                            onChange={(e) => this.change(e)}
-                                            label="confirm password"
-                                            size="small"
-                                            variant="outlined"
-                                            type={this.state.showPassword ? "text" : "password"}
-                                            fullWidth />
-                                    </div>
                                 </div>
 
 
@@ -285,15 +246,24 @@ class Signup extends React.Component {
                                     Show Password
                                 </span>
 
+
                                 <div className="footerButtons">
                                     <div className="signInLink">
                                         <Button
                                             color="primary">
-                                            <b>Sign in insted</b>
+                                            <b>Forget Password</b>
+                                        </Button>
+                                    </div>
+                                </div>
+                                <div className="footerButtons">
+                                    <div className="signInLink">
+                                        <Button
+                                            color="primary">
+                                            <b>Create Account</b>
                                         </Button>
                                     </div>
                                     <div className="nextButton">
-                                    
+
                                         <Button
                                             variant="contained"
                                             color="primary"
@@ -304,20 +274,15 @@ class Signup extends React.Component {
                                     </div>
                                 </div>
                             </form>
-                            <div className="regImg">
-                                <img src="https://ssl.gstatic.com/accounts/signup/glif/account.svg" alt="google imge" />
-                                <p className="imgText">
-                                    One account. All of Fundoo working for you.
-                                 </p>
-                            </div>
+
                         </div>
                     </div>
                     <Snackbar open={this.state.open}>
                         <Alert severity={this.state.snackType}>
                             {this.state.snackMessage}
-                          
+
                         </Alert>
-                       
+
                     </Snackbar>
                 </div>
 
