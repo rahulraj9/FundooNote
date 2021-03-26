@@ -6,7 +6,15 @@ import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
 
 import services from '../../Services/userServices'
- const service = new services()
+
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from '@material-ui/lab/Alert';
+function Alert(props) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+
+const service = new services()
 
 class Signup extends React.Component {
     constructor(props) {
@@ -31,6 +39,11 @@ class Signup extends React.Component {
             confirmPassword: "",
             confirmPasswordFlag: false,
             confirmPasswordErrorMsg: "",
+
+            snackMessage: "",
+            snackType: "",
+            setOpen: false,
+            open: false
 
         }
     }
@@ -152,13 +165,19 @@ class Signup extends React.Component {
             console.log(registrationData)
 
             service.Registration(registrationData).then((registrationData) => {
-               console.log("Reg succesfully");
+                console.log("Reg succesfully");
+                this.setState({ snackType: "success", snackMessage: "Registration successful", open: true, setOpen: true })
+
+
             }).catch((error) => {
                 console.log("Registration Failed" + error);
+                this.setState({ snackType: "error", snackMessage: "Registration Failed", open: true, setOpen: true })
             })
         }
         else {
             console.log("reg failed")
+
+            this.setState({ snackType: "error", snackMessage: "Registration Failed", open: true, setOpen: true })
         }
     }
 
@@ -292,6 +311,13 @@ class Signup extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <Snackbar open={this.state.open} >
+                        <Alert severity={this.state.snackType}>
+                            {this.state.snackMessage}
+                          
+                        </Alert>
+                       
+                    </Snackbar>
                 </div>
 
             </div>
