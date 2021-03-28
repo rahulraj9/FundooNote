@@ -44,8 +44,7 @@ class userController {
                     this.userControllerResponse(res, data);
                 }
             })
-        }
-        catch (error) {
+        } catch (error) {
             next(error)
 
         }
@@ -58,17 +57,18 @@ class userController {
 
                     response.flag = true;
                     response.message = result.message;
-                    res.status(statusCode.OK).send(response);
+                    res.status(result.status).send(response);
                 }).catch((err) => {
 
                     response.flag = false;
                     response.data = err.message;
-                    res.status(statusCode.BadRequest).send(response);
+                    res.status(err.status).send(response);
                 });
         } catch (error) {
             next(error)
         }
     }
+
 
     resetPassword(req, res, next) {
         try {
@@ -78,11 +78,11 @@ class userController {
                 .then((result) => {
                     response.flag = true;
                     response.message = result.message;
-                    res.status(statusCode.OK).send(response);
+                    res.status(result.status).send(response);
                 }).catch((err) => {
                     response.flag = false;
                     response.data = err.message;
-                    res.status(statusCode.BadRequest).send(response);
+                    res.status(err.status).send(response);
                 });
         } catch (error) {
             next(error)

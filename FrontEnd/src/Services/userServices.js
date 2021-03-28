@@ -9,4 +9,12 @@ export default class services {
         console.log("\n\n Userservices for registration --->", data)
         return http.Post(`${baseUrl}/registration`, data);
     };
+    login = (data) => {
+        console.log("\n\n Userservices for registration --->", data)
+        return http.Post(`${baseUrl}/login`, data);
+    }
+    resetPass = (data) => {
+        console.log("\n\n Userservices for registration --->", data)
+        return http.Post(`${baseUrl}/forgetpassword`, data);
+    }
 }

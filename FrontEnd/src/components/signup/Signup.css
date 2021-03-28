@@ -92,4 +92,7 @@
     .regImg {
         display: none;
     }
+    .snackbar {
+        display: none;
+    }
 }

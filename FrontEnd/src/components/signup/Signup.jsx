@@ -10,7 +10,7 @@ import services from '../../Services/userServices'
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from '@material-ui/lab/Alert';
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+    return <MuiAlert variant="filled" {...props} />;
 }
 
 
@@ -167,11 +167,15 @@ class Signup extends React.Component {
             service.Registration(registrationData).then((registrationData) => {
                 console.log("Reg succesfully");
                 this.setState({ snackType: "success", snackMessage: "Registration successful", open: true, setOpen: true })
-               
+                // setTimeout(()=>{
+                //     window.location.reload(false);
+                // }, 2000);
+                // console.log('page to reload')
+
 
             }).catch((error) => {
                 console.log("Registration Failed" + error);
-                this.setState({ snackType: "error", snackMessage: "Registration Failed", open: true, setOpen: true })
+                this.setState({ snackType: "error", snackMessage: error.response.data.message, open: true, setOpen: true })
             })
         }
         else {
@@ -243,6 +247,7 @@ class Signup extends React.Component {
                                             fullWidth />
                                     </div>
                                 </div>
+                                
 
 
                                 <div className="formInput">
@@ -293,7 +298,7 @@ class Signup extends React.Component {
                                         </Button>
                                     </div>
                                     <div className="nextButton">
-                                    
+
                                         <Button
                                             variant="contained"
                                             color="primary"
@@ -312,13 +317,15 @@ class Signup extends React.Component {
                             </div>
                         </div>
                     </div>
+                    <div className="snackbar">
                     <Snackbar open={this.state.open}>
                         <Alert severity={this.state.snackType}>
                             {this.state.snackMessage}
-                          
+
                         </Alert>
-                       
+
                     </Snackbar>
+                    </div>
                 </div>
 
             </div>

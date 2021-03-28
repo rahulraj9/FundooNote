@@ -10,7 +10,7 @@ import services from '../../Services/userServices'
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from '@material-ui/lab/Alert';
 function Alert(props) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
+    return <MuiAlert variant="filled" {...props} />;
 }
 
 
@@ -20,13 +20,6 @@ class Signup extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            firstName: "",
-            firstNameFlag: false,
-            firstNameErrorMsg: "",
-
-            lastName: "",
-            lastNameFlag: false,
-            lastNameErrorMsg: "",
 
             email: "",
             emailFlag: false,
@@ -35,10 +28,6 @@ class Signup extends React.Component {
             password: "",
             passwordFlag: false,
             passwordErrorMsg: "",
-
-            confirmPassword: "",
-            confirmPasswordFlag: false,
-            confirmPasswordErrorMsg: "",
 
             snackMessage: "",
             snackType: "",
@@ -64,12 +53,6 @@ class Signup extends React.Component {
     validate = () => {
         let isError = false
 
-        this.setState({ firstNameFlag: false })
-        this.setState({ firstNameErrorMsg: "" })
-
-        this.setState({ lastNameFlag: false })
-        this.setState({ lastNameErrorMsg: "" })
-
         this.setState({ emailFlag: false })
         this.setState({ emailErrorMsg: "" })
 
@@ -77,38 +60,6 @@ class Signup extends React.Component {
         this.setState({ passwordFlag: false })
         this.setState({ passwordErrorMsg: "" })
 
-        this.setState({ confirmPasswordFlag: false })
-        this.setState({ confirmPasswordErrorMsg: "" })
-
-
-
-        /**
-         *   @description : Validation for first name
-         */
-
-        if (
-            !/[a-zA-Z._]$/.test(
-                this.state.firstName
-            )
-        ) {
-            this.setState({ firstNameFlag: true })
-            this.setState({ firstNameErrorMsg: "Enter valid name" })
-            isError = true
-        }
-        if (this.state.firstName.length === 0) {
-            this.setState({ firstNameFlag: true })
-            this.setState({ firstNameErrorMsg: "Enter first name" })
-            isError = true
-        }
-
-        /**
-         *   @description :Validation for last name
-         */
-        if (this.state.lastName.length === 0) {
-            this.setState({ lastNameFlag: true })
-            this.setState({ lastNameErrorMsg: "Enter last name" })
-            isError = true
-        }
 
         /**
          *  @description : Validation for Email
@@ -130,7 +81,7 @@ class Signup extends React.Component {
          * @description : Validation for password
          */
 
-        if (this.state.password.length <6 ) {
+        if (this.state.password.length < 6) {
             this.setState({ passwordFlag: true })
             this.setState({ passwordErrorMsg: "Password is too Short" })
             isError = true
@@ -142,12 +93,6 @@ class Signup extends React.Component {
             isError = true
         }
 
-        if (this.state.password !== this.state.confirmPassword) {
-            this.setState({ confirmPasswordFlag: true })
-            this.setState({ confirmPasswordErrorMsg: "Passwords didn't match" })
-            isError = true
-
-        }
         return isError
     }
 
@@ -157,21 +102,20 @@ class Signup extends React.Component {
         if (!err) {
             console.log("calling api");
             let loginData = {
-                firstName: this.state.firstName,
-                lastName: this.state.lastName,
                 email: this.state.email,
                 password: this.state.password,
             };
             console.log(loginData)
 
-            service.login(loginData).then((loginData) => {
+            service.login(loginData).then((responseReceived) => {
+                
                 console.log("Reg succesfully");
+              
                 this.setState({ snackType: "success", snackMessage: "login successful", open: true, setOpen: true })
 
-
             }).catch((error) => {
-                console.log("login Failed" + error);
-                this.setState({ snackType: "error", snackMessage: "login Failed", open: true, setOpen: true })
+                console.log("login Failed" + error.response.data.message);
+                this.setState({ snackType: "error", snackMessage: error.response.data.message, open: true, setOpen: true })
             })
         }
         else {
@@ -267,8 +211,7 @@ class Signup extends React.Component {
                                         <Button
                                             variant="contained"
                                             color="primary"
-                                            onClick={this.onSubmit}
-                                        >
+                                            onClick={this.onSubmit}>
                                             Submit
                                         </Button>
                                     </div>
@@ -277,10 +220,11 @@ class Signup extends React.Component {
 
                         </div>
                     </div>
-                    <Snackbar open={this.state.open}>
+                    <Snackbar
+                        autoHideDuration={3000}
+                        open={this.state.open}>
                         <Alert severity={this.state.snackType}>
                             {this.state.snackMessage}
-
                         </Alert>
 
                     </Snackbar>

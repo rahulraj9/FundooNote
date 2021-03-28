@@ -28,12 +28,10 @@ class UserService {
                     return callback({ flag: false, message: "Email doesnot exits !", code: NotFound });
                 }
                 return callback({ flag: false, message: "Login Failed !", error: error, code: BadRequest });
-            }
-            else {
+            } else {
                 if (data) {
                     return callback(null, { flag: true, message: "Login sucessfull !", data: data, code: OK });
-                }
-                else {
+                } else {
                     return callback({ flag: false, message: "password not matched !", code: unauthorized });
                 }
             }
@@ -51,12 +49,12 @@ class UserService {
                 if (result) {
                     let token = jwtToken.tokenGeneration(tokenData);
                     mailler.mailer(email, token)
-                    return ({ flag: true, message: "Please Check Your Mail For Reset Password!!", status: statusCode.OK });
+                    return ({ flag: true, message: "Please Check Your Mail For forget Password Link!!", status: statusCode.OK });
                 } else {
                     return ({ flag: false, message: "Email Not Exist Please Enter Valid Mail", status: statusCode.NotFound });
                 }
             }).catch((error) => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
+                return ({ flag: false, message: "Something Went Wrong Please Check", error: error });
             })
 
     }
@@ -76,11 +74,3 @@ class UserService {
     }
 }
 module.exports = new UserService();
-
-
-
-
-
-
-
-

@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const mailler = require('../middleware/nodemailer')
-// var nodemailer = require('nodemailer');
+    // var nodemailer = require('nodemailer');
 var jwt = require('jsonwebtoken');
 let bcryptpassword = require("../middleware/bcryptpassword")
 let jwtToken = require("../middleware/jwtToken")
@@ -87,8 +87,7 @@ class userModel {
                             "token": token
                         }
                         callback(null, userData)
-                    }
-                    else {
+                    } else {
                         callback(null, result)
                     }
                 })
@@ -103,7 +102,8 @@ class userModel {
                 return result;
             })
             .catch((error) => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
+                return error;
+                // return ({ message: "Something Went Wrong Please Check", error: error });
             })
 
     }
@@ -121,12 +121,12 @@ class userModel {
 
     search(searchKey) {
         return users.find({
-            $or: [
-                { "email": { $regex: searchKey } },
-                { "firstName": { $regex: searchKey } },
-                { "lastName": { $regex: searchKey } }
-            ]
-        })
+                $or: [
+                    { "email": { $regex: searchKey } },
+                    { "firstName": { $regex: searchKey } },
+                    { "lastName": { $regex: searchKey } }
+                ]
+            })
             .then((result) => {
                 return result;
             })
