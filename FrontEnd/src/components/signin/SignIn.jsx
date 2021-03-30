@@ -16,7 +16,7 @@ function Alert(props) {
 
 const service = new services()
 
-class Signup extends React.Component {
+class SignIn extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -31,7 +31,6 @@ class Signup extends React.Component {
 
             snackMessage: "",
             snackType: "",
-            setOpen: false,
             open: false
 
         }
@@ -97,6 +96,11 @@ class Signup extends React.Component {
     }
 
 
+    nextPath(path) {
+        this.props.history.push(path);
+        console.log(this.props.history)
+      }
+    
     onSubmit = (e) => {
         const err = this.validate();
         if (!err) {
@@ -108,20 +112,19 @@ class Signup extends React.Component {
             console.log(loginData)
 
             service.login(loginData).then((responseReceived) => {
-                
                 console.log("Reg succesfully");
-              
-                this.setState({ snackType: "success", snackMessage: "login successful", open: true, setOpen: true })
+                this.setState({ snackType: "success", snackMessage: "login successful", open: true })
+                setTimeout(() => {  this.nextPath('../dashboard'); }, 2000);
 
             }).catch((error) => {
                 console.log("login Failed" + error.response.data.message);
-                this.setState({ snackType: "error", snackMessage: error.response.data.message, open: true, setOpen: true })
+                this.setState({ snackType: "error", snackMessage: error.response.data.message, open: true })
             })
         }
         else {
             console.log("reg failed")
 
-            this.setState({ snackType: "error", snackMessage: "login Failed", open: true, setOpen: true })
+            this.setState({ snackType: "error", snackMessage: "login Failed", open: true})
         }
     }
 
@@ -194,15 +197,18 @@ class Signup extends React.Component {
                                 <div className="footerButtons">
                                     <div className="signInLink">
                                         <Button
-                                            color="primary">
+                                            color="primary"
+                                            onClick={()=>this.nextPath('/forgotPassword')}>
                                             <b>Forget Password</b>
                                         </Button>
                                     </div>
                                 </div>
-                                <div className="footerButtons">
+                                <div className="footerButtonsSign">
                                     <div className="signInLink">
                                         <Button
-                                            color="primary">
+                                            color="primary"
+                                            onClick={() => this.nextPath('/registration')}
+                                            >
                                             <b>Create Account</b>
                                         </Button>
                                     </div>
@@ -237,6 +243,6 @@ class Signup extends React.Component {
 }
 
 
-export default Signup;
+export default SignIn;
 
 

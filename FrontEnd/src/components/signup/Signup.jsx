@@ -184,8 +184,9 @@ class Signup extends React.Component {
             this.setState({ snackType: "error", snackMessage: "Registration Failed", open: true, setOpen: true })
         }
     }
-
-
+    nextPath = (path) => {
+        this.props.history.push(path)
+    }
     render() {
 
         return (
@@ -247,7 +248,7 @@ class Signup extends React.Component {
                                             fullWidth />
                                     </div>
                                 </div>
-                                
+
 
 
                                 <div className="formInput">
@@ -293,7 +294,8 @@ class Signup extends React.Component {
                                 <div className="footerButtons">
                                     <div className="signInLink">
                                         <Button
-                                            color="primary">
+                                            color="primary"
+                                            onClick = {()=>this.nextPath('/login')}>
                                             <b>Sign in insted</b>
                                         </Button>
                                     </div>
@@ -318,13 +320,13 @@ class Signup extends React.Component {
                         </div>
                     </div>
                     <div className="snackbar">
-                    <Snackbar open={this.state.open}>
-                        <Alert severity={this.state.snackType}>
-                            {this.state.snackMessage}
+                        <Snackbar open={this.state.open}>
+                            <Alert severity={this.state.snackType}>
+                                {this.state.snackMessage}
 
-                        </Alert>
+                            </Alert>
 
-                    </Snackbar>
+                        </Snackbar>
                     </div>
                 </div>
 
