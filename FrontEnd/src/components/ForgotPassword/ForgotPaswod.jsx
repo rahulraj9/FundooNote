@@ -2,7 +2,6 @@ import React from 'react';
 import './ForgotPassword.css'
 
 import TextField from '@material-ui/core/TextField';
-import Checkbox from '@material-ui/core/Checkbox'
 import Button from '@material-ui/core/Button'
 
 import services from '../../Services/userServices'
@@ -86,7 +85,7 @@ class ForgetPassword extends React.Component {
             };
             console.log(resetPassData)
 
-            service.resetPass(resetPassData).then((responseReceived) => {
+            service.forgetPass(resetPassData).then((responseReceived) => {
                 if(responseReceived){
                 console.log("res",responseReceived.data.message)
                 this.setState({ snackType: "success", snackMessage: responseReceived.data.message, open: true, setOpen: true })

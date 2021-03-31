@@ -21,7 +21,7 @@ class ResetPassword extends React.Component {
         super(props)
         this.state = {
 
-        
+
 
             password: "",
             passwordFlag: false,
@@ -33,7 +33,6 @@ class ResetPassword extends React.Component {
 
             snackMessage: "",
             snackType: "",
-            setOpen: false,
             open: false
 
         }
@@ -57,15 +56,17 @@ class ResetPassword extends React.Component {
 
         this.setState({ passwordFlag: false })
         this.setState({ passwordErrorMsg: "" })
+        this.setState({ confirmPasswordFlag: false })
+        this.setState({ confirmPasswordErrorMsg: "" })
 
 
         /**
          * @description : Validation for password
          */
 
-        if (this.state.password.length === 0) {
+        if (this.state.password.length < 6) {
             this.setState({ passwordFlag: true })
-            this.setState({ passwordErrorMsg: "Enter a password" })
+            this.setState({ passwordErrorMsg: "password is too sort" })
             isError = true
         }
 
@@ -84,6 +85,9 @@ class ResetPassword extends React.Component {
         return isError
     }
 
+    nextPath =(path)=>{
+        this.props.history.push(path)
+    }
 
     onSubmit = (e) => {
         const err = this.validate();
@@ -93,12 +97,27 @@ class ResetPassword extends React.Component {
                 password: this.state.password,
             };
             console.log(forgetData)
-            this.setState({ snackType: "success", snackMessage: "Password Changed Sucessfully", open: true, setOpen: true })
+            let token = this.props.match.params.token;
+            console.log(token)
+            service.resetPass(forgetData,token).then((responseReceived) => {
+                if (responseReceived) {
+                    console.log("res", responseReceived.data.message)
+                    this.setState({ snackType: "success", snackMessage: responseReceived.data.message, open: true })
+                    setTimeout(() => {  this.nextPath('/login'); }, 2000);
+                }
+                else {
+                    this.setState({ snackType: "error", snackMessage: responseReceived.data.message, open: true})
+                }
+
+
+            }).catch((error) => {
+                console.log("resetPass Failed" + error.response.data.message);
+                this.setState({ snackType: "error", snackMessage: error.response.data.message, open: true })
+            })
         }
         else {
             console.log("reg failed")
-
-            this.setState({ snackType: "error", snackMessage: "Password Submission Failed", open: true, setOpen: true })
+            this.setState({ snackType: "error", snackMessage: "Password Submission Failed", open: true})
         }
     }
 
@@ -144,7 +163,7 @@ class ResetPassword extends React.Component {
                                 </div>
                                 <div className="formInput">
                                     <div className="formInputField">
-                                    <TextField
+                                        <TextField
                                             name="confirmPassword"
                                             value={this.state.confirmPassword}
                                             helperText={this.state.confirmPasswordErrorMsg}
@@ -169,7 +188,7 @@ class ResetPassword extends React.Component {
                                 </span>
 
 
-                                
+
                                 <div className="footerButtonsSign">
                                     <div className="signInLink">
                                         <Button

@@ -21,7 +21,7 @@ app.use(bodyParser.json())
 app.use(cors())
 
 
-app.use('/user', user)
+app.use('/', user)
 app.use('/', note)
 app.use('/', label)
 
@@ -37,7 +37,9 @@ app.use((error, req, res, next) => {
     res.status(500).send(response);
 })
 
-
+app.get('/', (req, res) => {
+    res.json("welcome")
+})
 app.listen(port, () => {
     console.log(`Server started at port: ${port}`);
     require('./dbconfig/dbConnection')

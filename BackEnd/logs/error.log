@@ -496,3 +496,15 @@ error: {"flag":false,"message":"Email doesnot exits !","code":404} {"timestamp":
 error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"30-03-2021 12:06:18"}
 error: {"flag":false,"message":"Email doesnot exits !","code":404} {"timestamp":"30-03-2021 12:06:27"}
 error: {"flag":false,"message":"Email doesnot exits !","code":404} {"timestamp":"30-03-2021 14:22:29"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"Email is Required!","param":"email","location":"body"},{"value":"","msg":"Email is Invalid!!!","param":"email","location":"body"}]} {"timestamp":"30-03-2021 14:56:33"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"30-03-2021 15:17:55"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"30-03-2021 15:18:01"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"Email is Required!","param":"email","location":"body"},{"value":"","msg":"Email is Invalid!!!","param":"email","location":"body"}]} {"timestamp":"30-03-2021 15:30:11"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"Email is Required!","param":"email","location":"body"},{"value":"","msg":"Email is Invalid!!!","param":"email","location":"body"}]} {"timestamp":"30-03-2021 15:37:18"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"","msg":"Email is Required!","param":"email","location":"body"},{"value":"","msg":"Email is Invalid!!!","param":"email","location":"body"}]} {"timestamp":"30-03-2021 16:43:55"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"30-03-2021 16:52:06"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"helll","msg":"Password atleast contains  6 character!","param":"password","location":"body"}]} {"timestamp":"30-03-2021 17:24:10"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"hgfd","msg":"Password atleast contains  6 character!","param":"password","location":"body"}]} {"timestamp":"30-03-2021 17:31:47"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"asdfg","msg":"Password atleast contains  6 character!","param":"password","location":"body"}]} {"timestamp":"30-03-2021 17:36:05"}
+error: {"success":false,"message":"you have filled invalid data","error":[{"value":"helll","msg":"Password atleast contains  6 character!","param":"password","location":"body"}]} {"timestamp":"30-03-2021 17:41:43"}
+error: {"flag":false,"message":"password not matched !","code":401} {"timestamp":"30-03-2021 17:46:39"}

@@ -113,8 +113,8 @@ class userModel {
         return users.updateOne({ email: email }, { $set: { password: password } })
             .then((result) => {
                 return result;
-            }).catch((err) => {
-                return ({ message: "Something Went Wrong Please Check", error: error });
+            }).catch((error) => {
+                return error;
             });
 
     }

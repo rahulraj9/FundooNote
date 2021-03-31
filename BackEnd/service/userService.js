@@ -65,10 +65,10 @@ class UserService {
                 if (result) {
                     return ({ flag: true, message: "Password has been successfully Changed!!", status: statusCode.OK });
                 } else {
-                    return ({ flag: false, message: "Something Went Wrong Please Do Forget Password Again!!", status: statusCode.BadRequest });
+                    return ({ flag: false, message: "Something Went Wrong Please Do Forget Password Again!!", status: statusCode.NotFound });
                 }
-            }).catch((err) => {
-                return ({ flag: false, message: "Please Enter Valid Input!!", status: statusCode.NotFound });
+            }).catch((error) => {
+                return ({ flag: false, message: "Please Enter Valid Input!!", error: error });
             });
 
     }
