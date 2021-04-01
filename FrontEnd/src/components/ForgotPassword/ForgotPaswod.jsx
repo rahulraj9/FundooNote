@@ -27,7 +27,8 @@ class ForgetPassword extends React.Component {
             snackMessage: "",
             snackType: "",
             setOpen: false,
-            open: false
+            open: false,
+           
 
         }
     }
@@ -44,6 +45,12 @@ class ForgetPassword extends React.Component {
         })
         console.log(e.target.value);
     }
+    SnackBarClose = () => {
+        this.setState({
+          open: false,
+          setOpen: false
+        })
+      };
 
     validate = () => {
         let isError = false
@@ -170,8 +177,9 @@ class ForgetPassword extends React.Component {
                         </div>
                     </div>
                     <Snackbar
-                       autoHideDuration={500}
-                        open={this.state.open}>
+                        open={this.state.open}
+                        autoHideDuration={1500}
+                        onClose={this.SnackBarClose}>
                         <Alert severity={this.state.snackType} >
                             {this.state.snackMessage}
                         </Alert>

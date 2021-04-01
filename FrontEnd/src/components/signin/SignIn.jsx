@@ -31,7 +31,8 @@ class SignIn extends React.Component {
 
             snackMessage: "",
             snackType: "",
-            open: false
+            open: false,
+            setOpen:false
 
         }
     }
@@ -41,6 +42,12 @@ class SignIn extends React.Component {
         });
     };
 
+    snackBarClose = () => {
+        this.setState({
+          open: false,
+          setOpen: false
+        })
+      };
 
     change = (e) => {
         this.setState({
@@ -113,18 +120,18 @@ class SignIn extends React.Component {
 
             service.login(loginData).then((responseReceived) => {
                 console.log("Reg succesfully");
-                this.setState({ snackType: "success", snackMessage: "login successful", open: true })
+                this.setState({ snackType: "success", snackMessage: "login successful", open: true,setOpen:true})
                 setTimeout(() => {  this.nextPath('../dashboard'); }, 2000);
 
             }).catch((error) => {
                 console.log("login Failed" + error.response.data.message);
-                this.setState({ snackType: "error", snackMessage: error.response.data.message, open: true })
+                this.setState({ snackType: "error", snackMessage: error.response.data.message, open: true,setOpen:true })
             })
         }
         else {
             console.log("reg failed")
 
-            this.setState({ snackType: "error", snackMessage: "login Failed", open: true})
+            // this.setState({ snackType: "error", snackMessage: "login Failed", open: true,setOpen:true})
         }
     }
 
@@ -227,8 +234,10 @@ class SignIn extends React.Component {
                         </div>
                     </div>
                     <Snackbar
+                        
+                        open={this.state.open}
                         autoHideDuration={3000}
-                        open={this.state.open}>
+                        onClose={this.snackBarClose}>
                         <Alert severity={this.state.snackType}>
                             {this.state.snackMessage}
                         </Alert>

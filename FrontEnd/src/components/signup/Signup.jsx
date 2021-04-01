@@ -42,8 +42,8 @@ class Signup extends React.Component {
 
             snackMessage: "",
             snackType: "",
-            setOpen: false,
-            open: false
+            open: false,
+            setOpen:false
 
         }
     }
@@ -52,6 +52,12 @@ class Signup extends React.Component {
             showPassword: !this.state.showPassword,
         });
     };
+    snackBarClose = () => {
+        this.setState({
+          open: false,
+          setOpen: false
+        })
+      };
 
 
     change = (e) => {
@@ -166,22 +172,19 @@ class Signup extends React.Component {
 
             service.Registration(registrationData).then((registrationData) => {
                 console.log("Reg succesfully");
-                this.setState({ snackType: "success", snackMessage: "Registration successful", open: true, setOpen: true })
-                // setTimeout(()=>{
-                //     window.location.reload(false);
-                // }, 2000);
-                // console.log('page to reload')
+                this.setState({ snackType: "success", snackMessage: "Registration successful", open: true ,setOpen:true})
+                setTimeout(() => {  this.nextPath('/login'); }, 2000);
 
 
             }).catch((error) => {
                 console.log("Registration Failed" + error);
-                this.setState({ snackType: "error", snackMessage: error.response.data.message, open: true, setOpen: true })
+                this.setState({ snackType: "error", snackMessage: error.response.data.message, open: true,setOpen:true })
             })
         }
         else {
             console.log("reg failed")
 
-            this.setState({ snackType: "error", snackMessage: "Registration Failed", open: true, setOpen: true })
+            this.setState({ snackType: "error", snackMessage: "Registration Failed", open: true,setOpen:true})
         }
     }
     nextPath = (path) => {
@@ -320,7 +323,9 @@ class Signup extends React.Component {
                         </div>
                     </div>
                     <div className="snackbar">
-                        <Snackbar open={this.state.open}>
+                        <Snackbar open={this.state.open}
+                         autoHideDuration={3000} 
+                         onClose={this.snackBarClose}>
                             <Alert severity={this.state.snackType}>
                                 {this.state.snackMessage}
 

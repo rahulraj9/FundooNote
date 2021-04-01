@@ -1,0 +1,68 @@
+.root {
+    display: flex;
+}
+
+.drawerButton {
+    margin: 8px 0 8px 0;
+}
+
+.drawerButton:hover {
+    background-color: rgb(236, 236, 236);
+    border-top-right-radius: 70px;
+    border-bottom-right-radius: 70px;
+}
+
+.search {
+    margin: 5px 5px 5px 5px;
+    height: 50px;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    background-color: rgb(238, 238, 238);
+    border-radius: 8px;
+}
+
+.searchIcon {
+    margin-left: 3%;
+}
+
+
+/* .drawerList {
+    padding-left: 10px;
+} */
+
+.topBar {
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+.headerIcon {
+    width: 45px;
+}
+
+.startOptions {
+    display: flex;
+    align-items: center;
+}
+
+.buttonContainer {
+    display: flex;
+}
+
+.headerTitle {
+    margin: 3%;
+    color: #5f6368;
+    font-size: x-large;
+    font-family: "Product Sans", Arial, sans-serif;
+}
+
+@media only screen and (max-width: 400px) {
+    .headerTitle {
+        margin: 1%;
+        font-size: 1.1em;
+    }
+    .headerIcon {
+        width: 30px;
+    }
+}
