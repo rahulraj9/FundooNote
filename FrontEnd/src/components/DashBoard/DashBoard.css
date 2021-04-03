@@ -15,15 +15,32 @@
 .search {
     margin: 5px 5px 5px 5px;
     height: 50px;
-    width: 70%;
+    width: 750px;
     display: flex;
     align-items: center;
     background-color: rgb(238, 238, 238);
     border-radius: 8px;
 }
 
+.leftSideHeader {
+    width: 70%;
+    display: flex;
+    justify-self: start;
+    justify-content: space-between;
+}
+
+.searchedButton {
+    display: none;
+}
+
 .searchIcon {
     margin-left: 3%;
+    color: gray;
+}
+
+.searchInput {
+    margin-left: 4%;
+    width: 80%;
 }
 
 
@@ -51,7 +68,8 @@
 }
 
 .headerTitle {
-    margin: 3%;
+    margin-left: 2%;
+    margin-right: 10%;
     color: #5f6368;
     font-size: x-large;
     font-family: "Product Sans", Arial, sans-serif;
@@ -64,5 +82,14 @@
     }
     .headerIcon {
         width: 30px;
+    }
+    .search {
+        margin: 5px 5px 5px 5px;
+        height: 50px;
+        width: 150px;
+        display: flex;
+        align-items: center;
+        background-color: rgb(238, 238, 238);
+        border-radius: 8px;
     }
 }
