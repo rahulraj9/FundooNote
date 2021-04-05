@@ -32,7 +32,7 @@ class SignIn extends React.Component {
             snackMessage: "",
             snackType: "",
             open: false,
-            setOpen:false
+            setOpen: false
 
         }
     }
@@ -44,10 +44,10 @@ class SignIn extends React.Component {
 
     snackBarClose = () => {
         this.setState({
-          open: false,
-          setOpen: false
+            open: false,
+            setOpen: false
         })
-      };
+    };
 
     change = (e) => {
         this.setState({
@@ -106,8 +106,8 @@ class SignIn extends React.Component {
     nextPath(path) {
         this.props.history.push(path);
         console.log(this.props.history)
-      }
-    
+    }
+
     onSubmit = (e) => {
         const err = this.validate();
         if (!err) {
@@ -118,14 +118,17 @@ class SignIn extends React.Component {
             };
             console.log(loginData)
 
-            service.login(loginData).then((responseReceived) => {
-                console.log("Reg succesfully");
-                this.setState({ snackType: "success", snackMessage: "login successful", open: true,setOpen:true})
+            service.login(loginData).then((loginData) => {
+                console.log("Login succesfully", loginData.data.data._id);
+                localStorage.setItem("fundooUserFName", loginData.data.data.firstName)
+                localStorage.setItem("fundooUserLName", loginData.data.data.lastName)
+                localStorage.setItem("fundooUserEmail", loginData.data.data.email)
+                this.setState({ snackType: "success", snackMessage: "login successful", open: true, setOpen: true })
                 setTimeout(() => {  this.nextPath('../dashboard'); }, 2000);
 
             }).catch((error) => {
                 console.log("login Failed" + error.response.data.message);
-                this.setState({ snackType: "error", snackMessage: error.response.data.message, open: true,setOpen:true })
+                this.setState({ snackType: "error", snackMessage: error.response.data.message, open: true, setOpen: true })
             })
         }
         else {
@@ -205,7 +208,7 @@ class SignIn extends React.Component {
                                     <div className="signInLink">
                                         <Button
                                             color="primary"
-                                            onClick={()=>this.nextPath('/forgotPassword')}>
+                                            onClick={() => this.nextPath('/forgotPassword')}>
                                             <b>Forget Password</b>
                                         </Button>
                                     </div>
@@ -215,7 +218,7 @@ class SignIn extends React.Component {
                                         <Button
                                             color="primary"
                                             onClick={() => this.nextPath('/registration')}
-                                            >
+                                        >
                                             <b>Create Account</b>
                                         </Button>
                                     </div>
@@ -234,7 +237,7 @@ class SignIn extends React.Component {
                         </div>
                     </div>
                     <Snackbar
-                        
+
                         open={this.state.open}
                         autoHideDuration={3000}
                         onClose={this.snackBarClose}>
