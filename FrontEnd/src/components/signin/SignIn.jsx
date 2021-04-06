@@ -119,7 +119,9 @@ class SignIn extends React.Component {
             console.log(loginData)
 
             service.login(loginData).then((loginData) => {
-                console.log("Login succesfully", loginData.data.data._id);
+                
+                console.log("Login succesfully", loginData.data.data.token);
+                localStorage.setItem("fundooUsertoken", loginData.data.data.token)
                 localStorage.setItem("fundooUserFName", loginData.data.data.firstName)
                 localStorage.setItem("fundooUserLName", loginData.data.data.lastName)
                 localStorage.setItem("fundooUserEmail", loginData.data.data.email)

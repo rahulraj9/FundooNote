@@ -18,9 +18,9 @@ import { deepPurple } from '@material-ui/core/colors';
 import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Avatar from '@material-ui/core/Avatar';
-
-
 import { Button, Paper } from "@material-ui/core";
+
+import AddNotes from '../AddNotes/AddNotes'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -93,9 +93,12 @@ const useStyles = makeStyles((theme) => ({
     },
     settingMenu: {
         marginTop: theme.spacing(6),
-      
-      },
-    
+
+    },
+    content:{
+        marginTop:  "-241px"
+    }
+  
 
 
 }));
@@ -130,6 +133,11 @@ export default function Dashboard(props) {
         setAnchor(null);
     };
     const logOut = () => {
+        localStorage.removeItem("fundooUsertoken")
+        localStorage.removeItem("fundooUserFName")
+        localStorage.removeItem("fundooUserLName")
+        localStorage.removeItem("fundooUserEmail")
+
         nextPath("../login");
     };
 
@@ -139,66 +147,66 @@ export default function Dashboard(props) {
         setEditLabel(false);
         setArchive(false);
         setBin(false);
-      };
+    };
     const reminderSelect = () => {
         setNote(false);
         setReminder(true);
         setEditLabel(false);
         setArchive(false);
         setBin(false);
-      };
+    };
 
-      const labelSelect = () => {
+    const labelSelect = () => {
         setNote(false);
         setReminder(false);
         setEditLabel(true);
         setArchive(false);
         setBin(false);
-      };
-      const archiveSelect = () => {
+    };
+    const archiveSelect = () => {
         setNote(false);
         setReminder(false);
         setEditLabel(false);
         setArchive(true);
         setBin(false);
-      };
-      const binSelect = () => {
+    };
+    const binSelect = () => {
         setNote(false);
         setReminder(false);
         setEditLabel(false);
         setArchive(false);
         setBin(true);
-      };
+    };
 
     return (
-        <div className={classes.root} >
+        <div className="root" className={classes.root} >
             <CssBaseline />
-            <AppBar position="fixed" className={classes.appBar}>
+            <AppBar position="fixed" position="fixed" className={classes.appBar}>
                 <Toolbar className={classes.topBar}>
-                    <span className="leftSideHeader">
-                        < div className="startOptions">
-                            <div>
+                    <span className="leftOptions">
+                        <div className="startOptions">
+                            <div className="menuButton">
                                 <IconButton className={classes.appBarButton} onClick={drawerOpenClose} edge="start">
-                                    <MenuIcon />
+                                    <MenuIcon className={classes.iconLogo} />
                                 </IconButton>
                             </div>
                             <div>
-                                <img className="headerIcon" src={icon} alt="Fundoo Icon" />
+                                <img className="headerIcon" src={icon} />
                             </div>
                             <div className="headerTitle">Fundoo</div>
-                            <div className="search">
+                        </div>
+
+                        <div className="search">
+                            <div className="searchIcon">
                                 <div className="searchIcon">
-                                    <div className="searchIcon">
-
-                                        <SearchIcon />
-
-                                    </div>
+                                    <SearchIcon />
                                 </div>
-                                <InputBase
-                                    className={classes.searchInput}
-                                    placeholder="Search…"
-                                />
                             </div>
+                            <InputBase
+                                className={classes.searchInput}
+                                placeholder="Search…"
+                                inputProps={{ "aria-label": "search" }}
+                            />
                         </div>
                     </span>
                     <span className="rightSideHeader">
@@ -208,33 +216,33 @@ export default function Dashboard(props) {
                             </IconButton>
                             <div className="ProfilePaper">
                                 <div className="ProfilePaperContainer">
-                                <Paper>
-                                    <Menu
-                                        className={classes.settingMenu}
-                                        anchorEl={anchor}
-                                        open={Boolean(anchor)}
-                                        onClose={profileHandleClose}
-                                    >
-                                        <div className="ProfileHandler">
-                                        <div className="ProfileHandlerAvatar"> <Avatar className={classes.large}></Avatar></div>
-                                        
-                                        <div className="ProfileHandler">
-                                            <ListItem >
-                                                {localStorage.getItem("fundooUserFName")}{" "}
-                                                {localStorage.getItem("fundooUserLName")}
-                                            </ListItem>
-                                            </div>
-                                        
+                                    <Paper>
+                                        <Menu
+                                            className={classes.settingMenu}
+                                            anchorEl={anchor}
+                                            open={Boolean(anchor)}
+                                            onClose={profileHandleClose}
+                                        >
+                                            <div className="ProfileHandler">
+                                                <div className="ProfileHandlerAvatar"> <Avatar className={classes.large}></Avatar></div>
 
-                                        <ListItem>
-                                            {localStorage.getItem("fundooUserEmail")}
-                                        </ListItem>
-                                        <div className="ProfileHandlerLogOut">
-                                            <Button variant="outlined" onClick={logOut}>LogOut</Button>
-                                        </div>
-                                        </div>
-                                    </Menu>
-                                </Paper>
+                                                <div className="ProfileHandler">
+                                                    <ListItem >
+                                                        {localStorage.getItem("fundooUserFName")}{" "}
+                                                        {localStorage.getItem("fundooUserLName")}
+                                                    </ListItem>
+                                                </div>
+
+
+                                                <ListItem>
+                                                    {localStorage.getItem("fundooUserEmail")}
+                                                </ListItem>
+                                                <div className="ProfileHandlerLogOut">
+                                                    <Button variant="outlined" onClick={logOut}>LogOut</Button>
+                                                </div>
+                                            </div>
+                                        </Menu>
+                                    </Paper>
                                 </div>
                             </div>
                         </div>
@@ -270,7 +278,7 @@ export default function Dashboard(props) {
 
                                 >
                                     <ListItemIcon>
-                                        <svg  height="28" viewBox="0 0 24 24">
+                                        <svg height="28" viewBox="0 0 24 24">
                                             <path d="M9 21c0 .55.45 1 1 1h4c.55 0 1-.45 1-1v-1H9v1zm3-19C8.14 2 5 5.14 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.86-3.14-7-7-7zm2.85 11.1l-.85.6V16h-4v-2.3l-.85-.6A4.997 4.997 0 0 1 7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 1.63-.8 3.16-2.15 4.1z"></path>
                                         </svg>
                                     </ListItemIcon>
@@ -338,7 +346,12 @@ export default function Dashboard(props) {
                     </div>
                 </Drawer>
             </div>
-            <h1>DashBoard</h1>
+          
+                <main className="Content">
+                    <AddNotes />
+                </main>
+
+           
         </div>
     );
 }

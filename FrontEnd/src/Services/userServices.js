@@ -15,7 +15,7 @@ export default class services {
         return http.Post(`${baseUrl}/forgetpassword`, data);
     }
     resetPass = (data, token) => {
-        return http.Post(`${baseUrl}/resetPassword/:token`, data, {
+        return http.Post(`${baseUrl}/resetPassword/${token}`, data, {
             headers: {
                 token: token
             }

@@ -7,6 +7,8 @@
     min-height: 100vh;
 }
 
+@media (prefers-reduced-motion: no-preference) {}
+
 @media only screen and (max-width: 600px) {
     .App {
         display: flex;
@@ -14,5 +16,17 @@
         align-items: center;
         position: fixed;
         margin-right: 26px;
+    }
+}
+
+@media only screen and (max-width: 400px) {
+    .addNoteOptions {
+        display: flex;
+        flex-direction: column;
+    }
+    .closeNotes {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
     }
 }

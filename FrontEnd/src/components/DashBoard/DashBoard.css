@@ -2,6 +2,11 @@
     display: flex;
 }
 
+.lastContent {
+    display: flex;
+    align-items: flex-start;
+}
+
 .drawerButton {
     margin: 8px 0 8px 0;
 }
@@ -12,45 +17,16 @@
     border-bottom-right-radius: 70px;
 }
 
-.search {
-    margin: 5px 5px 5px 5px;
-    height: 50px;
-    width: 750px;
-    display: flex;
-    align-items: center;
-    background-color: rgb(238, 238, 238);
-    border-radius: 8px;
-}
-
-.leftSideHeader {
-    width: 70%;
-    display: flex;
-    justify-self: start;
-    justify-content: space-between;
-}
-
-.searchedButton {
-    display: none;
-}
-
-.searchIcon {
-    margin-left: 3%;
-    color: gray;
-}
-
-.searchInput {
-    margin-left: 4%;
-    width: 80%;
-}
-
-
-/* .drawerList {
-    padding-left: 10px;
-} */
-
 .topBar {
     width: 100vw;
     display: flex;
+    justify-content: space-between;
+}
+
+.leftOptions {
+    width: 70%;
+    display: flex;
+    justify-self: start;
     justify-content: space-between;
 }
 
@@ -68,18 +44,73 @@
 }
 
 .headerTitle {
-    margin-left: 2%;
-    margin-right: 10%;
+    margin-left: 3%;
+    margin-right: 10px;
     color: #5f6368;
     font-size: x-large;
     font-family: "Product Sans", Arial, sans-serif;
 }
 
-.ProfileHandler {
-    /* padding: 20px; */
+.search {
+    margin: 5px 5px 5px 5px;
+    height: 50px;
+    width: 70%;
+    display: flex;
+    align-items: center;
+    background-color: rgb(238, 238, 238);
+    border-radius: 8px;
+}
+
+.searchedButton {
+    display: none;
+}
+
+.searchIcon {
+    margin-left: 3%;
+    color: gray;
+}
+
+.searchInput {
+    margin-left: 2%;
+    width: 90%;
+}
+
+.appsContainer {
+    display: flex;
+}
+
+.MenuList {
+    padding: 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.displayNotes {
+    width: 85vw;
+    margin: 1%;
+}
+
+.ProfileHandler {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.Content {
+    margin-top: -238px;
+}
+
+@media only screen and (max-width: 600px) {
+    .leftOptions {
+        width: auto;
+    }
+    .rightSideHeader {
+        margin-left: 9px;
+    }
+    .Content {
+        margin-top: 10px;
+    }
 }
 
 @media only screen and (max-width: 400px) {
@@ -90,13 +121,7 @@
     .headerIcon {
         width: 30px;
     }
-    .search {
-        margin: 5px 5px 5px 5px;
-        height: 50px;
-        width: 150px;
-        display: flex;
-        align-items: center;
-        background-color: rgb(238, 238, 238);
-        border-radius: 8px;
+    .rightOptions {
+        justify-content: flex-end;
     }
 }
