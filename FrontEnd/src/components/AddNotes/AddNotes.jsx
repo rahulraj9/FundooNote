@@ -32,12 +32,13 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function AddNotes() {
+function AddNotes(props) {
     const classes = useStyles();
 
     var [showTitle, titleDisplay] = React.useState("");
     var [notedata, setNoteData] = React.useState("");
     var [notetitle, setNoteTitle] = React.useState("");
+    const [clr, setClr] = React.useState(props.editColor);
 
     const clickedNote = () => {
         titleDisplay(true);
@@ -60,7 +61,7 @@ function AddNotes() {
             }
             service.addNote(formData, token).then((responseRecived) => {
                 if (responseRecived) {
-                    console.log("added");
+                    console.log("added",responseRecived);
                 }
 
             }).catch((error) => {
