@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         width: "100%"
     },
     button: {
-        padding: "10px",
+        padding: "6px",
     },
     colorPaper: {
         marginLeft: theme.spacing(5),
@@ -58,7 +58,13 @@ function NoteOptn(props) {
     const colorsHandleClose = () => {
         setAnchorEl(null);
     };
-    const AddColor = (e, colr) => {
+    const addColor = (e, colr) => {
+        if (edit) {
+            let data = {
+              color: colr,
+            };
+        }
+        props.setClr(colr);
       
     }
     const ColorBlock = () => {
@@ -68,6 +74,7 @@ function NoteOptn(props) {
                     colors.map((color) => (
                         <IconButton
                             className={classes.colorButton}
+                            onClick={(e) => addColor(e, color.color)}
                             style={{
                                 backgroundColor: color.color,
                                 display: "inline-block",

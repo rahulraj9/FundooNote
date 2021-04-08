@@ -12,21 +12,21 @@ function App() {
   return (
 
     <div className="App">
-     
+
       <BrowserRouter>
 
-      <Switch>
-        <Redirect path="/" to="/login" exact />
-        <Route path="/registration" component={Signup} exact />
-        <Route path="/login" component={SignIn} exact />
-        <Route path="/forgotPassword" component={ForgetPassword} exact />
-        <Route path="/resetPassword/:token" component={ResetPassword} exact />
-        <ProtectedRoutes path="/dashboard" component={DashBoard} exact />
-      </Switch> 
+        <Switch>
+          <Redirect path="/" to="/login" exact />
+          <Route path="/registration" component={Signup} exact />
+          <Route path="/login" component={SignIn} exact />
+          <Route path="/forgotPassword" component={ForgetPassword} exact />
+          <Route path="/resetPassword/:token" component={ResetPassword} exact />
+          <ProtectedRoutes path="/dashboard" component={DashBoard} exact />
+        </Switch>
       </BrowserRouter>
 
-        </div >
-       
+    </div >
+
   );
 }
 

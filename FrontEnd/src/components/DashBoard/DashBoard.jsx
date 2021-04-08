@@ -19,8 +19,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Avatar from '@material-ui/core/Avatar';
 import { Button, Paper } from "@material-ui/core";
-
-import AddNotes from '../AddNotes/AddNotes'
+import Notes from '../Notes/Notes'
 
 const useStyles = makeStyles((theme) => ({
 
@@ -95,10 +94,10 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(6),
 
     },
-    content:{
-        marginTop:  "-241px"
+    content: {
+        marginTop: "-241px"
     }
-  
+
 
 
 }));
@@ -132,6 +131,7 @@ export default function Dashboard(props) {
     const profileHandleClose = () => {
         setAnchor(null);
     };
+
     const logOut = () => {
         localStorage.removeItem("fundooUsertoken")
         localStorage.removeItem("fundooUserFName")
@@ -179,9 +179,9 @@ export default function Dashboard(props) {
     };
 
     return (
-        <div className="root" className={classes.root} >
+        <div  className={classes.root} >
             <CssBaseline />
-            <AppBar position="fixed" position="fixed" className={classes.appBar}>
+            <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar className={classes.topBar}>
                     <span className="leftOptions">
                         <div className="startOptions">
@@ -191,7 +191,7 @@ export default function Dashboard(props) {
                                 </IconButton>
                             </div>
                             <div>
-                                <img className="headerIcon" src={icon} />
+                                <img className="headerIcon" src={icon} alt="imh"/>
                             </div>
                             <div className="headerTitle">Fundoo</div>
                         </div>
@@ -345,13 +345,19 @@ export default function Dashboard(props) {
                         </List>
                     </div>
                 </Drawer>
+               
             </div>
-          
-                <main className="Content">
-                    <AddNotes />
+{/* 
+            <main className="Content">
+                <Notes />
+            </main> */}
+             <main className={classes.main}>
+                    <div className={classes.content}>
+                       <Notes />
+                    </div>
                 </main>
 
-           
+
         </div>
     );
 }
