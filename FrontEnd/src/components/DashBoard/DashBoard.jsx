@@ -19,7 +19,11 @@ import SearchIcon from "@material-ui/icons/Search";
 import InputBase from "@material-ui/core/InputBase";
 import Avatar from '@material-ui/core/Avatar';
 import { Button, Paper } from "@material-ui/core";
+import { Switch } from "react-router-dom";
+import ProtectedRoutes from '../../ProtectedRoutes'
+
 import Notes from '../Notes/Notes'
+
 
 const useStyles = makeStyles((theme) => ({
 
@@ -50,8 +54,9 @@ const useStyles = makeStyles((theme) => ({
         whiteSpace: "nowrap",
     },
     drawerOpen: {
+
         width: "230px",
-        // borderRight: "lightgray solid 1px",
+        borderRight: "lightgray solid 1px",
         transition: theme.transitions.create("width", {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.enteringScreen,
@@ -95,8 +100,19 @@ const useStyles = makeStyles((theme) => ({
 
     },
     content: {
-        marginTop: "-241px"
-    }
+        width: "95%",
+        display: "flex",
+        alignItems: "flex-start",
+        justifyContent: "flex-end",
+        padding: theme.spacing(0, 1),
+        ...theme.mixins.toolbar,
+    },
+    main: {
+        marginTop: "80px",
+        marginLeft: "100px",
+        zIndex: "-1",
+        minHeight: "100vh",
+    },
 
 
 
@@ -122,21 +138,26 @@ export default function Dashboard(props) {
     const drawerOpenClose = () => {
         setOpen(!open);
     };
-    const nextPath = (path) => {
-        props.history.push(path);
-    };
     const profileHandleOpen = (event) => {
         setAnchor(event.currentTarget);
     };
     const profileHandleClose = () => {
         setAnchor(null);
     };
+    const nextPath = (path) => {
+        props.history.push(path);
+    };
+    React.useEffect(() => {
+        noteSelect();
+    }, []);
+  
 
     const logOut = () => {
         localStorage.removeItem("fundooUsertoken")
         localStorage.removeItem("fundooUserFName")
         localStorage.removeItem("fundooUserLName")
         localStorage.removeItem("fundooUserEmail")
+        localStorage.removeItem("fundooUsertoken")
 
         nextPath("../login");
     };
@@ -147,6 +168,7 @@ export default function Dashboard(props) {
         setEditLabel(false);
         setArchive(false);
         setBin(false);
+        nextPath("../dashboard/notes");
     };
     const reminderSelect = () => {
         setNote(false);
@@ -154,6 +176,7 @@ export default function Dashboard(props) {
         setEditLabel(false);
         setArchive(false);
         setBin(false);
+       
     };
 
     const labelSelect = () => {
@@ -169,6 +192,7 @@ export default function Dashboard(props) {
         setEditLabel(false);
         setArchive(true);
         setBin(false);
+        nextPath("../dashboard/archive");
     };
     const binSelect = () => {
         setNote(false);
@@ -176,10 +200,11 @@ export default function Dashboard(props) {
         setEditLabel(false);
         setArchive(false);
         setBin(true);
+        nextPath("../dashboard/bin");
     };
 
     return (
-        <div  className={classes.root} >
+        <div className={classes.root} >
             <CssBaseline />
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar className={classes.topBar}>
@@ -191,7 +216,7 @@ export default function Dashboard(props) {
                                 </IconButton>
                             </div>
                             <div>
-                                <img className="headerIcon" src={icon} alt="imh"/>
+                                <img className="headerIcon" src={icon} alt="imh" />
                             </div>
                             <div className="headerTitle">Fundoo</div>
                         </div>
@@ -209,8 +234,8 @@ export default function Dashboard(props) {
                             />
                         </div>
                     </span>
-                    <span className="rightSideHeader">
-                        <div>
+                    <span className="rightOption">
+                        <div className="buttonContainer">
                             <IconButton className={classes.appBarButton} onClick={profileHandleOpen} edge="start">
                                 <Avatar></Avatar>
                             </IconButton>
@@ -232,8 +257,6 @@ export default function Dashboard(props) {
                                                         {localStorage.getItem("fundooUserLName")}
                                                     </ListItem>
                                                 </div>
-
-
                                                 <ListItem>
                                                     {localStorage.getItem("fundooUserEmail")}
                                                 </ListItem>
@@ -345,17 +368,25 @@ export default function Dashboard(props) {
                         </List>
                     </div>
                 </Drawer>
-               
+
+
+                <main className={classes.main}>
+                    <div className={classes.content}>
+                        <Switch>
+                            <ProtectedRoutes path="/dashboard/notes">
+                                <Notes/>
+                            </ProtectedRoutes>
+                        </Switch>
+                    </div>
+                </main>
+
             </div>
-{/* 
+            {/* 
             <main className="Content">
                 <Notes />
             </main> */}
-             <main className={classes.main}>
-                    <div className={classes.content}>
-                       <Notes />
-                    </div>
-                </main>
+
+
 
 
         </div>

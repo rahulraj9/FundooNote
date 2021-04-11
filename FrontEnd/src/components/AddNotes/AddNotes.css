@@ -5,8 +5,8 @@
     box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 2px 4px 6px 4px rgba(60, 64, 67, 0.149);
     border-radius: 10px;
     font-family: Roboto, Arial, sans-serif;
-    /* margin-left: 180px; */
-    margin-top: 30px;
+    /* /* margin-left: 180px; */
+    /* margin-top: -200px; */
 }
 
 .notesField {
@@ -37,12 +37,21 @@
     align-items: center;
 }
 
+.closeNotes {
+    padding: 10px 10px 10px 10px;
+    font-size: 10px;
+    font-family: 'Google Sans', Roboto, Arial, sans-serif;
+}
+
+.closeNotes:hover {
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 600px) {
     .addNotes {
         display: flex;
         width: 300px;
-        margin-top: 317px;
-        margin-left: 0px;
     }
     .noteInput {
         width: 46%;

@@ -21,7 +21,7 @@ function App() {
           <Route path="/login" component={SignIn} exact />
           <Route path="/forgotPassword" component={ForgetPassword} exact />
           <Route path="/resetPassword/:token" component={ResetPassword} exact />
-          <ProtectedRoutes path="/dashboard" component={DashBoard} exact />
+          <ProtectedRoutes path="/dashboard" component={DashBoard} />
         </Switch>
       </BrowserRouter>
 

@@ -30,10 +30,9 @@ export default function Notes(props) {
 
     return (
         <div className="mainContent" >
-            <AddNotes/>
-            <DisplayNotes notes={show} />
-            <div >
-            </div>
+            <AddNotes getall={getAllNotes} />
+            <DisplayNotes notes={show} getall={getAllNotes}/>
+        
         </div>
     );
 }

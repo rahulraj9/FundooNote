@@ -30,6 +30,14 @@
     justify-content: space-between;
 }
 
+.rightOptions {
+    width: 26%;
+    /* border: black solid; */
+    display: flex;
+    justify-self: end;
+    justify-content: space-between;
+}
+
 .headerIcon {
     width: 45px;
 }
@@ -45,7 +53,7 @@
 
 .headerTitle {
     margin-left: 3%;
-    margin-right: 10px;
+    /* margin-right: 10px; */
     color: #5f6368;
     font-size: x-large;
     font-family: "Product Sans", Arial, sans-serif;

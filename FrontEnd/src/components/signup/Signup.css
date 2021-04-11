@@ -84,6 +84,10 @@
     }
     .registrationContainer {
         width: 100%;
+        display: flex;
+    }
+    .registrationContainerHeaderText {
+        font-size: 23px;
     }
     .formInput {
         display: flex;

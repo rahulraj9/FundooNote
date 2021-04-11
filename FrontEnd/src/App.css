@@ -14,8 +14,8 @@
         display: flex;
         justify-content: flex-start;
         align-items: center;
-        position: fixed;
-        margin-right: 26px;
+        /* position: fixed;
+        margin-right: 26px; */
     }
 }
 
