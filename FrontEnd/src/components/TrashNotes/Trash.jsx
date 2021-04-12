@@ -1,17 +1,15 @@
-import React from 'react'
+import React, { useEffect } from "react";
+import InputBase from "@material-ui/core/InputBase";
 import { makeStyles } from "@material-ui/core/styles";
-import NoteOptions from '../NoteIconOption/NoteOptn'
-import AddNote from '../AddNotes/AddNotes'
+import NoteOptions from "../NoteIconOption/NoteOptn";
+import Services from "../../Services/noteService";
 import Dialog from "@material-ui/core/Dialog";
-import './DisplayNote.css'
-
+import AddNote from "../AddNotes/AddNotes";
+import Typography from '@material-ui/core/Typography';
+import "../DisplayNotes/DisplayNote.css";
+const service = new Services();
 
 const useStyles = makeStyles((theme) => ({
-
-    noteText: {
-        wordWrap: "break-word",
-        margin: "4px 4px 4px 4px"
-    },
     dialogBox: {
         display: "flex",
         flexDirection: "column",
@@ -23,11 +21,13 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
         justifyContent: "flex-start",
     },
+    noteText: {
+        wordWrap: "break-word",
+        margin: "4px 4px 4px 4px"
+    }
 }));
 
-
-function DisplayNotes(props) {
-
+function ArchiveNotes(props) {
     const classes = useStyles();
     const [open, setOpen] = React.useState(false);
     const [edit, setEdit] = React.useState(false);
@@ -35,25 +35,46 @@ function DisplayNotes(props) {
     var [note, setNote] = React.useState("");
     const [clr, setClr] = React.useState("#fafafa");
     const [noteId, setNoteId] = React.useState();
+    const [data, setData] = React.useState([]);
+    const [trash, setTrash] = React.useState(true);
+
+    React.useEffect(() => {
+        getArchiveNotes();
+    }, []);
+
+    const getArchiveNotes = () => {
+        service.getNote()
+            .then((data) => {
+                let arrayData = data.data.data;
+                let array = arrayData.reverse();
+                console.log("Archive Note List" + array);
+                setData(array);
+            })
+            .catch((err) => {
+                console.log("error = " + err);
+            });
+    };
 
     const dialogOpen = (e, data) => {
+        e.stopPropagation();
         setEdit(true)
         setTitle(data.title);
         setNote(data.description);
-        setOpen(true);
-        setNoteId(data._id);
         setClr(data.color);
+        setNoteId(data._id);
+        setOpen(true);
     };
+
     const dialogClose = () => {
         setOpen(false);
     };
+
     const Note = () => {
-        console.log(title);
         return (
             <div className="AllNotes">
-                {props.notes
-                 .filter((data) => data.isArchive === false)
-                 .filter((data) => data.isTrash === false)
+                {data
+                    // props.notes
+                    .filter((data) => data.isTrash === true)
                     .map((data) => (
                         <div
                             className="noteBlock"
@@ -63,17 +84,20 @@ function DisplayNotes(props) {
                                 <p className={classes.noteText} >{data.description}</p>
                             </div>
                             <div className="optionContainer">
-                                <div
-                                    onMouseEnter={(e) => {
-                                        setClr(clr);
-                                    }}
+                                <div onMouseEnter={(e) => {
+                                    setClr(clr);
+                                }}
                                     onMouseOver={setEdit(true)}
                                     className="noteOption">
                                     <NoteOptions
-                                        setEdited={edit}
+                                        getall={getArchiveNotes}
+
+                                        trash={trash}
+                                        setColor={clr}
                                         setClr={setClr}
                                         editId={data._id}
-                                        getall={props.getall} />
+                                        setEdited={edit}
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -81,6 +105,7 @@ function DisplayNotes(props) {
             </div>
         );
     };
+
     return (
         <div className="mainContent">
             <div className="displayNotes">
@@ -91,19 +116,18 @@ function DisplayNotes(props) {
                     open={open}
                     onClose={dialogClose} >
                     <AddNote
-                        getall={props.getall}
                         setEdited={edit}
+                        getall={getArchiveNotes}
                         dialogOff={dialogClose}
                         editOpen={open}
+                        editId={noteId}
                         editTitle={title}
                         editDisc={note}
-                        editId={noteId}
-                        editColor={clr} 
+                        editColor={clr}
                         className={classes.dialogBox} />
                 </Dialog>
             </div>
         </div>
     );
 }
-
-export default DisplayNotes
+export default ArchiveNotes

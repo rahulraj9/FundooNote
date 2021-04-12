@@ -39,7 +39,8 @@ function AddNotes(props) {
     const [edit, setEdit] = React.useState(props.setEdited);
     const [clr, setClr] = React.useState(props.editColor);
     const [noteId, setNoteId] = React.useState(props.editId);
-
+    const [archive, setArchive] = React.useState(props.archive);
+    const [trash, setTrash] = React.useState(props.trash);
     const clickedNote = () => {
         titleDisplay(true);
     };
@@ -129,6 +130,8 @@ function AddNotes(props) {
                             getall={props.getall}
                             dialogOff={props.dialogOff}
                             editId={props.editId}
+                            archive={archive}
+                            trash={trash}
                         />
                         <div className="closeNotes">
                             <IconButton className={classes.closeNotes} onClick={closeNote}>

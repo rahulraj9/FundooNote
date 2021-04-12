@@ -2,6 +2,7 @@ import React from "react";
 import AddNotes from "../AddNotes/AddNotes";
 import DisplayNotes from "../DisplayNotes/DisplayNotes"
 import Services from "../../Services/noteService";
+import Archive from "../ArchiveNotes/ArchiveNotes"
 import "./Notes.css";
 const service = new Services();
 

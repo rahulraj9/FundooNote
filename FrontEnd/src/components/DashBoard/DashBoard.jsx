@@ -23,6 +23,8 @@ import { Switch } from "react-router-dom";
 import ProtectedRoutes from '../../ProtectedRoutes'
 
 import Notes from '../Notes/Notes'
+import ArchiveNotes from '../ArchiveNotes/ArchiveNotes'
+import TrashNotes from '../TrashNotes/Trash'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -125,7 +127,7 @@ export default function Dashboard(props) {
     const [reminder, setReminder] = React.useState(false)
     const [editLabel, setEditLabel] = React.useState(false)
     const [archive, setArchive] = React.useState(false)
-    const [bin, setBin] = React.useState(false)
+    const [trash, setTrash] = React.useState(false);
     const [anchor, setAnchor] = React.useState(null);
 
 
@@ -150,7 +152,7 @@ export default function Dashboard(props) {
     React.useEffect(() => {
         noteSelect();
     }, []);
-  
+
 
     const logOut = () => {
         localStorage.removeItem("fundooUsertoken")
@@ -167,16 +169,16 @@ export default function Dashboard(props) {
         setReminder(false);
         setEditLabel(false);
         setArchive(false);
-        setBin(false);
-        nextPath("../dashboard/notes");
+        setTrash(false);
+        nextPath("/dashboard/notes");
     };
     const reminderSelect = () => {
         setNote(false);
         setReminder(true);
         setEditLabel(false);
         setArchive(false);
-        setBin(false);
-       
+        setTrash(false);
+
     };
 
     const labelSelect = () => {
@@ -184,23 +186,23 @@ export default function Dashboard(props) {
         setReminder(false);
         setEditLabel(true);
         setArchive(false);
-        setBin(false);
+        setTrash(false);
     };
     const archiveSelect = () => {
         setNote(false);
         setReminder(false);
         setEditLabel(false);
         setArchive(true);
-        setBin(false);
-        nextPath("../dashboard/archive");
+        setTrash(false);
+        nextPath("/dashboard/archive");
     };
-    const binSelect = () => {
+    const trashSelect = () => {
         setNote(false);
         setReminder(false);
         setEditLabel(false);
         setArchive(false);
-        setBin(true);
-        nextPath("../dashboard/bin");
+        setTrash(true);
+        nextPath("/dashboard/trash");
     };
 
     return (
@@ -351,18 +353,18 @@ export default function Dashboard(props) {
                                     <ListItemText primary="Archive" />
                                 </ListItem>
                             </div>
-                            <div className="drawerButton" onClick={binSelect}>
+                            <div className="drawerButton" onClick={trashSelect}>
                                 <ListItem
                                     button
                                     className={classes.drawerButton}
-                                    style={{ backgroundColor: bin ? "#feefc3" : "transparent" }}
+                                    style={{ backgroundColor: trash ? "#feefc3" : "transparent" }}
                                 >
                                     <ListItemIcon>
                                         <svg width="28" height="28" viewBox="0 0 24 24">
                                             <path d=" M15 4V3H9v1H4v2h1v13c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V6h1V4h-5zm2 15H7V6h10v13z"></path>
                                         </svg>
                                     </ListItemIcon>
-                                    <ListItemText primary="Bin" />
+                                    <ListItemText primary="trash" />
                                 </ListItem>
                             </div>
                         </List>
@@ -374,7 +376,13 @@ export default function Dashboard(props) {
                     <div className={classes.content}>
                         <Switch>
                             <ProtectedRoutes path="/dashboard/notes">
-                                <Notes/>
+                                <Notes />
+                            </ProtectedRoutes>
+                            <ProtectedRoutes path="/dashboard/archive">
+                                <ArchiveNotes />
+                            </ProtectedRoutes>
+                            <ProtectedRoutes path="/dashboard/trash">
+                                <TrashNotes />
                             </ProtectedRoutes>
                         </Switch>
                     </div>

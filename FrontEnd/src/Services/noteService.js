@@ -40,4 +40,19 @@ export default class services {
         })
     }
 
+    archive = (noteId, data) => {
+        return http.Put(`${baseUrl}/moveToArchive/${noteId}`, data, {
+            headers: {
+                token: token
+            }
+        })
+    }
+    trash = (noteId, data) => {
+        return http.Put(`${baseUrl}/moveToTrash/${noteId}`, data, {
+            headers: {
+                token: token
+            }
+        })
+    }
+
 }

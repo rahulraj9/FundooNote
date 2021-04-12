@@ -6,6 +6,11 @@ import ImageOutlinedIcon from "@material-ui/icons/ImageOutlined";
 import PersonAddIcon from "@material-ui/icons/PersonAddOutlined";
 import ColorLensOutlinedIcon from "@material-ui/icons/ColorLensOutlined";
 import MoreVertOutlinedIcon from "@material-ui/icons/MoreVertOutlined";
+import DeleteForeverRoundedIcon from "@material-ui/icons/DeleteForeverRounded";
+import RestoreFromTrashRoundedIcon from "@material-ui/icons/RestoreFromTrashRounded";
+import PublishRoundedIcon from "@material-ui/icons/PublishRounded";
+
+import SystemUpdateAltOutlinedIcon from "@material-ui/icons/SystemUpdateAltOutlined";
 import ArchiveIcon from '@material-ui/icons/Archive';
 import Services from '../../Services/noteService';
 
@@ -19,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
         marginLeft: theme.spacing(5),
     },
     button: {
-        padding: "6px",
+        padding: "7px",
     },
     colorMenu: {
         width: "130px",
@@ -50,6 +55,8 @@ function NoteOptn(props) {
     const [edit, setEdit] = React.useState(props.setEdited);
     const [anchorE2, setAnchorE2] = React.useState(null);
     const [noteId, setNoteId] = React.useState(props.editId);
+    const [archive, setArchive] = React.useState(props.archive);
+    const [trash, setTrash] = React.useState(props.trash);
 
     const colors = [
         { color: "#fafafa" },
@@ -84,12 +91,32 @@ function NoteOptn(props) {
 
     const del = () => {
         console.log(noteId)
+        service.trash(noteId).then((data) => {
+            console.log("deleted");
+            props.getall();
+        }).catch((error) => {
+            console.log("Technical Issues")
+        })
+    }
+    const deleteForever = () => {
+        console.log(noteId)
         service.del(noteId).then((data) => {
             console.log("deleted");
             props.getall();
         }).catch((error) => {
             console.log("Technical Issues")
         })
+    }
+
+
+    const Archive = () => {
+        service.archive(noteId).then((data) => {
+            console.log("move to archive");
+            props.getall();
+        }).catch((error) => {
+            console.log("error")
+        })
+
     }
     const addColor = (e, colr) => {
         if (edit) {
@@ -121,27 +148,50 @@ function NoteOptn(props) {
     };
     return (
         <div className={classes.optionButton}>
-            <div className='optionfield'>
-                <IconButton className={classes.button} title="Remind me">
-                    <AddAlertIcon />
-                </IconButton>
-                <IconButton className={classes.button} title="collaborator">
-                    <PersonAddIcon />
-                </IconButton>
-                <IconButton className={classes.button} title="change color" onMouseOver={colorsHandleClick}>
-                    <ColorLensOutlinedIcon />
-                </IconButton>
-                <IconButton className={classes.button} title="Add image">
-                    <ImageOutlinedIcon />
-                </IconButton>
-                <IconButton className={classes.button} title="Archive">
-                    <ArchiveIcon />
-                </IconButton>
-                <IconButton className={classes.button} title="More" onClick={deleteHandleOpen}>
-                    <MoreVertOutlinedIcon />
-                </IconButton>
-
+            <div>
+                {trash ? (
+                    <div>
+                        <IconButton className={classes.button}>
+                            <DeleteForeverRoundedIcon onClick={deleteForever} />
+                        </IconButton>
+                        <IconButton className={classes.button}>
+                            <RestoreFromTrashRoundedIcon onClick={del} />
+                        </IconButton>
+                    </div>
+                ) : (
+                    <div className='optionfield'>
+                        <IconButton className={classes.button}>
+                            <AddAlertIcon />
+                        </IconButton>
+                        <IconButton className={classes.button}>
+                            <PersonAddIcon />
+                        </IconButton>
+                        <IconButton
+                            onMouseOver={colorsHandleClick}
+                            className={classes.button}
+                        >
+                            <ColorLensOutlinedIcon />
+                        </IconButton>
+                        <IconButton className={classes.button}>
+                            <ImageOutlinedIcon />
+                        </IconButton>
+                        <IconButton className={classes.button}>
+                            {archive ? (
+                                <PublishRoundedIcon onClick={Archive} />
+                            ) : (
+                                <SystemUpdateAltOutlinedIcon onClick={Archive} />
+                            )}
+                        </IconButton>
+                        <IconButton className={classes.button} onClick={deleteHandleOpen}>
+                            <MoreVertOutlinedIcon />
+                        </IconButton>
+                    </div>
+                )}
             </div>
+
+
+
+
 
             <div
                 style={{ display: open ? "block" : "none" }}
