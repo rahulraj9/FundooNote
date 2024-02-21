@@ -1,14 +1,13 @@
 const mongoose = require('mongoose')
 const labelmodel = require("../model/LabelModel")
 const usermodel = require("../model/usermodel")
-const redisCache = require('../middleware/redisCache')
 const Schema = mongoose.Schema
 const noteSchema = new Schema({
 
-    notetitle: {
+    title: {
         type: String
     },
-    notedata: {
+    description: {
         type: String
     },
     userId: {

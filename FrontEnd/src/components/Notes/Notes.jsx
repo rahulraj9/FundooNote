@@ -18,9 +18,10 @@ export default function Notes(props) {
         service
             .getNote()
             .then((data) => {
+                console.log("dataaaaaa",data.data.title)
                 let arrayData = data.data.data;
                 let array = arrayData.reverse();
-                console.log(array);
+                console.log("arrayaaaaaaaaaaaaaaaa",array);
                 setShow(array);
             })
             .catch((err) => {

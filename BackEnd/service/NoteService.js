@@ -1,6 +1,5 @@
 const noteModel = require('../model/NoteModel')
 const user = require('../model/usermodel')
-const redisCache = require('../middleware/redisCache')
 let statusCode = require('../middleware/httpStatusCode.json')
 
 class NoteService {
@@ -98,7 +97,6 @@ class NoteService {
             if (err) {
                 return callback(err);
             } else if (data) {
-                redisCache.loadCache(data.noteId, data)
                 return callback(null, data)
             }
         });

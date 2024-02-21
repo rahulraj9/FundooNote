@@ -15,7 +15,7 @@ export default class services {
     }
 
     getNote = () => {
-        return http.Get(`${baseUrl}/get`, {
+        return http.Get(`${baseUrl}`, {
             headers: {
                 token: token
             }

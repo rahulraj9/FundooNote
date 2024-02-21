@@ -61,12 +61,12 @@ module.exports = {
             .isString()
     ],
     addNote: [
-        body('notetitle')
+        body('title')
             .trim()
             .not()
             .isEmpty()
             .withMessage('title required'),
-        body('notedata')
+        body('description')
             .trim()
             .not()
             .isEmpty()

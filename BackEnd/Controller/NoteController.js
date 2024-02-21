@@ -1,6 +1,5 @@
 const noteService = require('../service/NoteService')
 let statusCode = require('../middleware/httpStatusCode.json')
-const redisCache = require('../middleware/redisCache')
 let response = {}
 class NoteController {
 
@@ -10,7 +9,6 @@ class NoteController {
             let id = req.decoded._id;
             noteService.noteInsert(req.body, id)
                 .then((result) => {
-                    redisCache.loadCache(id, result.data)
                     response.data = result.data;
                     response.flag = true;
                     response.message = result.message;
@@ -34,7 +32,6 @@ class NoteController {
             console.log("update id and data", id, newData);
             noteService.updateNote(id, newData)
                 .then((result) => {
-                    redisCache.loadCache(id, result.newdata)
                     response.data = newData
                     response.flag = true;
                     response.message = result.message;
@@ -56,7 +53,6 @@ class NoteController {
             console.log(id)
             noteService.deleteNote(id)
                 .then((result) => {
-                    redisCache.deleteCache(id)
                     response.flag = true;
                     response.data = result.data;
                     response.message = result.message;
@@ -75,7 +71,6 @@ class NoteController {
             let id = req.decoded._id;
             noteService.getUserAllNotes(id)
                 .then((result) => {
-                    redisCache.loadCache(id, result.data)
                     response.data = result.data;
                     response.flag = true;
                     response.message = result.message;
@@ -96,7 +91,6 @@ class NoteController {
             let id = req.params.id;
             noteService.archiveNote(id)
                 .then((result) => {
-                    redisCache.deleteCache(userid)
                     response.flag = true;
                     response.data = result.data;
                     response.message = result.message;
@@ -117,7 +111,6 @@ class NoteController {
             let id = req.params.id;
             noteService.trashNote(id)
                 .then((result) => {
-                    redisCache.deleteCache(userid)
                     response.flag = true;
                     response.data = result.data;
                     response.message = result.message;

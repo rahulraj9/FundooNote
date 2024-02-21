@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 
-mongoose.connect("mongodb://localhost:27017/FundooNote", {
+mongoose.connect("mongodb://127.0.0.1:27017/FundooNote", {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -9,5 +9,5 @@ mongoose.connect("mongodb://localhost:27017/FundooNote", {
 }).then(() => {
     console.log("connection Establised Sucessfully!");
 }).catch((e) => {
-    console.log("noconnection");
+    console.log("noconnection",e);
 })

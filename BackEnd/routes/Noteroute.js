@@ -3,16 +3,15 @@ const { addNote, deleteNote, updateNotes, moveToArchive, moveToTrash,label } = r
 const { validation } = require('../middleware/validate')
 const noteController = require('../Controller/NoteController')
 const jwtToken = require("../middleware/jwtToken")
-const redisCache = require('../middleware/redisCache')
 
-router.post('/note', addNote, validation, jwtToken.tokenVerify, noteController.noteCreate);
-router.get('/note', jwtToken.tokenVerify,redisCache.checkCache, noteController.getNote);
+router.post('/note',addNote, validation, jwtToken.tokenVerify, noteController.noteCreate);
+router.get('/note', jwtToken.tokenVerify, noteController.getNote);
 router.put('/note/:id', jwtToken.tokenVerify, noteController.updateNote)
 router.delete('/note/:id', jwtToken.tokenVerify, noteController.deleteNote)
 
 
-router.put('/moveToArchive/:id', jwtToken.tokenVerify, noteController.archiveNote)
-router.put('/moveToTrash/:id', jwtToken.tokenVerify, noteController.trashNote)
+router.put('/note/moveToArchive/:id', jwtToken.tokenVerify, noteController.archiveNote)
+router.put('/note/moveToTrash/:id', jwtToken.tokenVerify, noteController.trashNote)
 
 /**
  * LABEL API
