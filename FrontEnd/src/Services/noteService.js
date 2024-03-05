@@ -3,7 +3,7 @@ import Axios from "./axiosServices";
 const http = new Axios();
 const token = localStorage.getItem("fundooUsertoken")
 
-const baseUrl = "http://localhost:8000/note";
+const baseUrl = "https://fundoonote.onrender.com/note";
 
 export default class services {
     addNote = (data) => {

@@ -2,7 +2,7 @@ import Axios from "./axiosServices";
 
 const http = new Axios();
 
-const baseUrl = "http://localhost:8000/user";
+const baseUrl = "https://fundoonote.onrender.com/user";
 
 export default class services {
     Registration = (data) => {
