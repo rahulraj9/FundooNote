@@ -10,7 +10,7 @@ const mailer = (email, token) => {
         }
     });
 
-    const link = `<a href="http://localhost:3000/resetPassword/${token}">Click Here</a>`
+    const link = `<a href="https://notes-3704f.web.app/resetPassword/${token}">Click Here</a>`
     console.log("toen" + token);
     var mailOption = {
         from: process.env.MAIL,
